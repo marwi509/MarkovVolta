@@ -31,7 +31,7 @@ public class Sequence {
 	{
 		amount++;
 	}
-	public void setSequenceLength(int theLength)
+	public static void setSequenceLength(int theLength)
 	{
 		sequenceLength = theLength;
 	}
