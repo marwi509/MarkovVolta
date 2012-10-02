@@ -24,7 +24,8 @@ public class CharacterItem implements LyricsItem{
 		else
 			return false;
 	}
-	public int getHash()
+	
+	public int hashCode()
 	{
 		return character.charAt(0);
 	}

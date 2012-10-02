@@ -22,7 +22,9 @@ public class WordItem implements LyricsItem{
 		else
 			return false;
 	}
-	public int getHash()
+	
+	
+	public int hashCode()
 	{
 		int result=word.charAt(0);
 		for(int i=1;i<word.length();i++)
@@ -31,6 +33,7 @@ public class WordItem implements LyricsItem{
 		}
 		return result;
 	}
+	
 	public String toString() {
 		return word+" ";
 	}
