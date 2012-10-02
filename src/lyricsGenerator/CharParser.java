@@ -1,8 +1,12 @@
 package lyricsGenerator;
-
 import java.util.Vector;
 
-
+/**
+ * CharParser
+ * implements Parser
+ *
+ *
+ */
 public class CharParser implements Parser{
 
 	@Override
