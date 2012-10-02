@@ -12,7 +12,6 @@ public class Sequence {
 	public Sequence copyMe()
 	{
 		Sequence tempSequence = new Sequence();
-		tempSequence.setSequenceLength(sequenceLength);
 		for(int i=0;i<items.size();i++)
 		{
 			tempSequence.push(items.get(i).copyMe());
