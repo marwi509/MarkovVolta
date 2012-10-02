@@ -35,17 +35,18 @@ public class Sequence {
 		sequenceLength = theLength;
 	}
 	
-	public int getHash()
+	public int hashCode()
 	{
 		if(items.isEmpty())
 			return 0;
-		int result=items.get(0).getHash();
+		int result=items.get(0).hashCode();
 		for(int i=1;i<items.size();i++)
 		{
-			result+=items.get(i).getHash()*Math.pow(2,i);
+			result+=items.get(i).hashCode()*Math.pow(2,i);
 		}
 		return result;
 	}
+	
 	public int getAmount()
 	{
 		return amount;

@@ -5,15 +5,26 @@ import java.util.Vector;
 
 public class HashTable {
 	
-	private Vector<Vector<Sequence>> table = new Vector<Vector<Sequence>>(512);
+	private Vector<Vector<Sequence>> table;
+	private int insertions = 0;
+	private int currentSize = 0;
+	private int maxSize = 512 * 512; 
 	
 	public HashTable()
 	{
+		table = new Vector<Vector<Sequence>>(512);
 		table.setSize(512);
+		currentSize = 512;
 	}
+	
+	public HashTable(HashTable H)
+	{
+		
+	}
+	
 	public void insertSequence(final Sequence theSequence)
 	{
-		int hashValue = theSequence.getHash()%512;
+		int hashValue = theSequence.hashCode()%512;
 		
 		if(table.get(hashValue)==null)
 		{
@@ -21,6 +32,7 @@ public class HashTable {
 			Vector<Sequence> tempVector = new Vector<Sequence>();
 			tempVector.add(theSequence.copyMe());
 			table.setElementAt(tempVector, hashValue);
+			insertions++;
 		}
 		else
 		{
@@ -36,12 +48,11 @@ public class HashTable {
 			table.get(hashValue).add(theSequence.copyMe());
 			
 		}
-		
 	}
 	
 	public int getAmount(final Sequence theSequence)
 	{
-		int index = theSequence.getHash()%512;
+		int index = theSequence.hashCode()%512;
 			
 			if(table.get(index)==null)
 				return 0;
