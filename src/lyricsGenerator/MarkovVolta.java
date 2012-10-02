@@ -22,7 +22,7 @@ public class MarkovVolta {
 		
 		FileReader reader = new FileReader();
 		Parser parser = new CharParser();
-		Sequence.setSequenceLength(1);
+		Sequence.setSequenceLength(4);
 		MarkovDictionary dictionary = new MarkovDictionary();
 		//reader.readFile();
 		//Vector<LyricsItem> vector = parser.parse(reader.getContent());

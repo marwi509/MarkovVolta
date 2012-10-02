@@ -8,7 +8,8 @@ public class HashTable {
 	private Vector<Vector<Sequence>> table;
 	private int insertions = 0;
 	private int currentSize = 0;
-	private int maxSize = 512 * 512; 
+	private int maxSize = 1024 * 1024;
+	private boolean fixingSize = false;
 	
 	public HashTable()
 	{
@@ -17,15 +18,37 @@ public class HashTable {
 		currentSize = 512;
 	}
 	
-	public HashTable(HashTable H)
+	private void FixSize()
 	{
-		
+		fixingSize = true;
+		if((insertions  > currentSize && currentSize * 2 <= maxSize))
+		{
+			Vector<Vector<Sequence> > tempVector = table;
+			table = new Vector<Vector<Sequence>>(currentSize * 2);
+			table.setSize(currentSize * 2);
+			currentSize = currentSize * 2;
+			insertions = 0;
+			
+			for(int i = 0; i < tempVector.size(); i ++)
+			{
+				if(tempVector.get(i) != null)
+				{
+					for(int j = 0; j < tempVector.get(i).size(); j ++)
+					{
+						Sequence tempSequence = tempVector.get(i).get(j);
+						
+						insertSequence(tempSequence);
+					}
+				}
+			}
+			
+		}
+		fixingSize = false;
 	}
 	
 	public void insertSequence(final Sequence theSequence)
 	{
-		int hashValue = theSequence.hashCode()%512;
-		
+		int hashValue = theSequence.hashCode()%currentSize;
 		if(table.get(hashValue)==null)
 		{
 			
@@ -46,13 +69,16 @@ public class HashTable {
 				}
 			}
 			table.get(hashValue).add(theSequence.copyMe());
+			insertions++;
 			
 		}
+		if(!fixingSize)
+			FixSize();;
 	}
 	
 	public int getAmount(final Sequence theSequence)
 	{
-		int index = theSequence.hashCode()%512;
+		int index = theSequence.hashCode()%currentSize;
 			
 			if(table.get(index)==null)
 				return 0;

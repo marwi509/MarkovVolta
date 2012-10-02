@@ -16,6 +16,7 @@ public class Sequence {
 		{
 			tempSequence.push(items.get(i).copyMe());
 		}
+		tempSequence.setAmount(amount);
 		return tempSequence;
 	}
 	public void push(LyricsItem theItem)
@@ -50,6 +51,10 @@ public class Sequence {
 	public int getAmount()
 	{
 		return amount;
+	}
+	public void setAmount(int amountIn)
+	{
+		amount = amountIn;
 	}
 	
 	public LinkedList<LyricsItem> getList()
