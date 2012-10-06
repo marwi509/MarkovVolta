@@ -17,10 +17,25 @@ public class LyricsFacade {
 	/* Standard constructor */
 	public LyricsFacade()
 	{
+		setUseCharacter();
+	}
+	
+	/* Set the facade to use characters */
+	public void setUseCharacter()
+	{
 		theParser = new CharParser();
 		theDictionary = new MarkovDictionary();
 		theLyricsCreator = new LyricsCreator();
 		Sequence.setSequenceLength(4);
+	}
+	
+	/* Set the facade to use words */
+	public void setUseWord()
+	{
+		theParser = new WordParser();
+		theDictionary = new MarkovDictionary();
+		theLyricsCreator = new SimpleLyricsCreator();
+		Sequence.setSequenceLength(1);
 	}
 	
 	/* Add a song to the dictionary */
