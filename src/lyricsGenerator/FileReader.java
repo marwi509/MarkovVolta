@@ -39,4 +39,8 @@ class FileReader
 	{
 		return fileContent;
 	}
+	public String toString()
+	{
+		return getContent();
+	}
 }
