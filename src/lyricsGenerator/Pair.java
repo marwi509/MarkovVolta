@@ -35,4 +35,9 @@ public class Pair {
 	{
 		return amount;
 	}
+	
+	public int hashCode()
+	{
+		return item.hashCode();
+	}
 }
