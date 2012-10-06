@@ -43,9 +43,14 @@ public class LyricsFacade {
 	{
 		FileReader theFileReader = new FileReader();
 		theFileReader.readFile(filename);
+		System.out.println("File read.");
+		
 		String fileContent = theFileReader.toString();
 		Vector<LyricsItem> theItems = theParser.parse(fileContent);
+		System.out.println("File content parsed.");
+		
 		theDictionary.addItemVector(theItems);
+		System.out.println("File content added to dictionary.");
 	}
 	
 	/* Generate a song */
