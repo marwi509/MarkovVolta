@@ -10,7 +10,7 @@ import java.util.Vector;
  * of occurrences of each character. This is kept in a Vector of the class Pair
  *
  */
-public class charDictionary implements Dictionary{
+public class CharDictionary implements Dictionary{
 
 	private Vector<Pair> theDictionary = new Vector<Pair>(); // The dictionary with characters and number of occurrences.
 	private int totalItems = 0;
