@@ -9,30 +9,34 @@ public class MarkovDictionary implements Dictionary{
 	private Vector<SequenceProb> items = new Vector<SequenceProb>();
 	private Sequence theSequence = new Sequence();
 	private HashTable table = new HashTable();
+	private HashTableLyricsItem theItemTable = new HashTableLyricsItem();
 	private Random randomGenerator = new Random();
 	
 	@Override
 	public void addItemVector(Vector<LyricsItem> theVector) {
 		
 		theSequence = new Sequence();
+		
 		for(int i=0;i<theVector.size();i++)
 		{
-			
+			boolean alreadyExists = theItemTable.contains(theVector.get(i));
 			boolean found = false;
-			for(int j=0;j<items.size();j++)
+			if(alreadyExists)
 			{
-				
-				if(theVector.get(i).equals(items.get(j).getItem()))
+				for(int j=0;j<items.size();j++)
 				{
-					items.get(j).addSequence(theSequence);
-					found = true;
+					
+					if(theVector.get(i).equals(items.get(j).getItem()))
+					{
+						items.get(j).addSequence(theSequence);
+						found = true;	
+					}
 					
 				}
-				
 			}
 			if(!found)
 			{
-
+				theItemTable.insertItem(theVector.get(i));
 				items.add(new SequenceProb(theVector.get(i),theSequence));
 				
 			}
