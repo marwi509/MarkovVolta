@@ -1,12 +1,12 @@
 package lyricsGenerator;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Vector;
 
 
-public class HashTable<Element extends Hashable & Copyable> {
+public class HashTable<Element extends Hashable> {
 	
 	private Vector<LinkedList<Element>> table;
 	private int insertions = 0;
