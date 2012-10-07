@@ -16,10 +16,10 @@ public class MarkovVolta {
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/son.txt"));
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/drunkship.txt"));
 		
-		Files.add(new String("/home/marcus/Dokument/Mars Volta/Genesis.txt"));
+		//Files.add(new String("/home/marcus/Dokument/Mars Volta/Genesis.txt"));
 		LyricsFacade theFacade = new LyricsFacade();
 		theFacade.setUseCharacter();
-		theFacade.setSequenceLength(4);
+		theFacade.setSequenceLength(6);
 		
 		
 		for(int i = 0; i < Files.size(); i ++)
@@ -28,7 +28,7 @@ public class MarkovVolta {
 		}
 
 		System.out.println(theFacade.generateSong());
-		
+		theFacade.toFile("/home/marcus/Dokument/Mars Volta/output/song.txt");
 		
 	}
 }
