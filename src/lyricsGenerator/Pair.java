@@ -1,7 +1,7 @@
 package lyricsGenerator;
 
 
-public class Pair {
+public class Pair implements Hashable{
 	
 	private LyricsItem item;
 	private int amount;
@@ -36,8 +36,24 @@ public class Pair {
 		return amount;
 	}
 	
+	@Override
 	public int hashCode()
 	{
 		return item.hashCode();
+	}
+	
+	@Override
+	public Pair copyMe()
+	{
+		return new Pair(item.copyMe(), amount);
+	}
+	
+	@Override
+	public boolean equals(Comparable C) 
+	{
+		if(C.getClass() != this.getClass())
+			return false;
+		Pair tempPair = (Pair)C;
+		return this.getItem().equals(tempPair.getItem());
 	}
 }

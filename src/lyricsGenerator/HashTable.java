@@ -1,19 +1,22 @@
 package lyricsGenerator;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Vector;
 
 
-public class HashTable {
+public class HashTable<Element extends Hashable & Copyable> {
 	
-	private Vector<Vector<Sequence>> table;
+	private Vector<LinkedList<Element>> table;
 	private int insertions = 0;
 	private int currentSize = 0;
-	private int maxSize = 1024 * 1024;
+	private int maxSize = 1024 * 256;
 	private boolean fixingSize = false;
 	
 	public HashTable()
 	{
-		table = new Vector<Vector<Sequence>>(512);
+		table = new Vector<LinkedList<Element>>(512);
 		table.setSize(512);
 		currentSize = 512;
 	}
@@ -23,8 +26,8 @@ public class HashTable {
 		fixingSize = true;
 		if((insertions  > currentSize && currentSize * 2 <= maxSize))
 		{
-			Vector<Vector<Sequence> > tempVector = table;
-			table = new Vector<Vector<Sequence>>(currentSize * 2);
+			Vector<LinkedList<Element> > tempVector = table;
+			table = new Vector<LinkedList<Element>>(currentSize * 2);
 			table.setSize(currentSize * 2);
 			currentSize = currentSize * 2;
 			insertions = 0;
@@ -35,9 +38,9 @@ public class HashTable {
 				{
 					for(int j = 0; j < tempVector.get(i).size(); j ++)
 					{
-						Sequence tempSequence = tempVector.get(i).get(j);
+						Element tempElement = tempVector.get(i).get(j);
 						
-						insertSequence(tempSequence);
+						insert(tempElement);
 					}
 				}
 			}
@@ -46,49 +49,56 @@ public class HashTable {
 		fixingSize = false;
 	}
 	
-	public void insertSequence(final Sequence theSequence)
+	
+	public Element insert(final Element theElement)
 	{
-		int hashValue = theSequence.hashCode()%currentSize;
+		if(!fixingSize)
+			FixSize();
+		
+		int hashValue = theElement.hashCode() % currentSize;
 		if(table.get(hashValue)==null)
 		{
 			
-			Vector<Sequence> tempVector = new Vector<Sequence>();
-			tempVector.add(theSequence.copyMe());
+			LinkedList<Element> tempVector = new LinkedList<Element>();
+			tempVector.add((Element)theElement.copyMe());
 			table.setElementAt(tempVector, hashValue);
 			insertions++;
+			return tempVector.get(0);
 		}
 		else
 		{
-			
-			for(int i=0;i<table.get(hashValue).size();i++)
+			ListIterator<Element> iter = table.get(hashValue).listIterator();
+			while(iter.hasNext())
 			{
-				if(table.get(hashValue).get(i).equals(theSequence))
-				{
-					table.get(hashValue).get(i).increment();
-					return;
-				}
+				Element temp = iter.next();
+				if(temp.equals(theElement))
+					return temp;
 			}
-			table.get(hashValue).add(theSequence.copyMe());
+
+			table.get(hashValue).add((Element)theElement.copyMe());
 			insertions++;
+			return table.get(hashValue).get(table.get(hashValue).size()-1);
 			
 		}
-		if(!fixingSize)
-			FixSize();;
 	}
 	
-	public int getAmount(final Sequence theSequence)
+	
+	public Element contains(final Element theElement)
 	{
-		int index = theSequence.hashCode()%currentSize;
+		int index = theElement.hashCode() % currentSize;
 			
-			if(table.get(index)==null)
-				return 0;
-		
-		for(int i=0;i<table.get(index).size();i++)
+		if(table.get(index)==null)
 		{
-			
-			if(table.get(index).get(i).equals(theSequence))
-				return table.get(index).get(i).getAmount();
+			return null;
 		}
-		return 0;
+		
+		ListIterator<Element> iter = table.get(index).listIterator();
+		while(iter.hasNext())
+		{
+			Element temp = iter.next();
+			if(temp.equals(theElement))
+				return temp;
+		}
+		return null;
 	}
 }

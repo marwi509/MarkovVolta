@@ -60,4 +60,9 @@ public class LyricsFacade {
 		theLyricsCreator.setSongLengt(songLength);
 		return theLyricsCreator.toString();
 	}
+	
+	public void setSequenceLength(int length)
+	{
+		Sequence.setSequenceLength(length);
+	}
 }

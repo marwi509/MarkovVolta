@@ -3,11 +3,11 @@ package lyricsGenerator;
 import java.util.LinkedList;
 
 
-public class Sequence {
+public class Sequence implements Hashable{
 
 	private LinkedList<LyricsItem> items = new LinkedList<LyricsItem>();
 	private static int sequenceLength = 4;
-	private int amount = 1;
+	private int amount = 0;
 	
 	public Sequence copyMe()
 	{
@@ -43,7 +43,7 @@ public class Sequence {
 		int result=items.get(0).hashCode();
 		for(int i=1;i<items.size();i++)
 		{
-			result+=items.get(i).hashCode()*Math.pow(2,i);
+			result+=items.get(i).hashCode()*Math.pow(8,i);
 		}
 		return result;
 	}
@@ -83,6 +83,15 @@ public class Sequence {
 			returnString+=items.get(i);
 		}
 		return returnString;
+	}
+	
+	@Override
+	public boolean equals(Comparable C) 
+	{
+		if(C.getClass() != this.getClass())
+			return false;
+		Sequence tempSequence = (Sequence)C;
+		return this.equals(tempSequence);
 	}
 	
 }

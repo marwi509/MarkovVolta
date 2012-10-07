@@ -7,7 +7,7 @@ public class MarkovVolta {
 	public static void main(String args[])
 	{
 		Vector<String> Files = new Vector<String>();
-		/*
+		
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/aegis.txt"));
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/goliath.txt"));
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/lvia.txt"));
@@ -15,10 +15,11 @@ public class MarkovVolta {
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/esp.txt"));
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/son.txt"));
 		Files.add(new String("/home/marcus/Dokument/Mars Volta/drunkship.txt"));
-		*/
-		Files.add(new String("/home/marcus/Dokument/Mars Volta/bible.txt"));
+		
+		Files.add(new String("/home/marcus/Dokument/Mars Volta/Genesis.txt"));
 		LyricsFacade theFacade = new LyricsFacade();
-		//theFacade.setUseWord();
+		theFacade.setUseCharacter();
+		theFacade.setSequenceLength(4);
 		
 		
 		for(int i = 0; i < Files.size(); i ++)

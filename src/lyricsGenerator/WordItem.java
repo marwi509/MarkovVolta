@@ -1,6 +1,6 @@
 package lyricsGenerator;
 
-public class WordItem implements LyricsItem{
+public class WordItem extends LyricsItem{
 
 	private String word;
 	public WordItem(String c)
@@ -29,7 +29,7 @@ public class WordItem implements LyricsItem{
 		int result=word.charAt(0);
 		for(int i=1;i<word.length();i++)
 		{
-			result+=word.charAt(i)*Math.pow(2,i);
+			result+=word.charAt(i)*Math.pow(8,i);
 		}
 		return result;
 	}
@@ -37,5 +37,6 @@ public class WordItem implements LyricsItem{
 	public String toString() {
 		return word+" ";
 	}
+
 
 }

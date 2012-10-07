@@ -6,7 +6,7 @@ package lyricsGenerator;
  *
  */
 
-public class CharacterItem implements LyricsItem{
+public class CharacterItem extends LyricsItem{
 
 	private String character;
 	

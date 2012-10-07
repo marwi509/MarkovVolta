@@ -8,39 +8,30 @@ public class MarkovDictionary implements Dictionary{
 
 	private Vector<SequenceProb> items = new Vector<SequenceProb>();
 	private Sequence theSequence = new Sequence();
-	private HashTable table = new HashTable();
-	private HashTableLyricsItem theItemTable = new HashTableLyricsItem();
+	private HashTable<Sequence> table = new HashTable<Sequence>();
+	private HashTable<Pair> theItemTable = new HashTable<Pair>();
 	private Random randomGenerator = new Random();
 	
 	@Override
 	public void addItemVector(Vector<LyricsItem> theVector) {
 		
 		theSequence = new Sequence();
-		
 		for(int i=0;i<theVector.size();i++)
 		{
-			boolean alreadyExists = theItemTable.contains(theVector.get(i));
+			Pair tempPair = theItemTable.contains(new Pair(theVector.get(i), 0));
+			//int alreadyExists = theItemTable.contains(new Pair(theVector.get(i), 0));
 			boolean found = false;
-			if(alreadyExists)
+			if(tempPair != null)
 			{
-				for(int j=0;j<items.size();j++)
-				{
-					
-					if(theVector.get(i).equals(items.get(j).getItem()))
-					{
-						items.get(j).addSequence(theSequence);
-						found = true;	
-					}
-					
-				}
+				items.get(tempPair.getAmount()).addSequence(theSequence);
 			}
 			if(!found)
 			{
-				theItemTable.insertItem(theVector.get(i));
+				theItemTable.insert(new Pair(theVector.get(i), items.size()));
 				items.add(new SequenceProb(theVector.get(i),theSequence));
-				
 			}
-			table.insertSequence(theSequence);
+			Sequence tempSequence = table.insert(theSequence);
+			tempSequence.increment();
 			theSequence.push(theVector.get(i));
 		}
 		theSequence = new Sequence();
@@ -48,11 +39,16 @@ public class MarkovDictionary implements Dictionary{
 
 	@Override
 	public LyricsItem getItem() {
-		if(table.getAmount(theSequence)==0)
+		if(table.contains(theSequence) == null)
 		{
 			theSequence = new Sequence();
 		}
-		float totalAmount =(float)table.getAmount(theSequence);
+		float totalAmount = 0.0f;
+		Sequence tempSequence = table.contains(theSequence);
+		if(tempSequence != null)
+		{
+			totalAmount = (float)tempSequence.getAmount();
+		}
 		float randomNumber = randomGenerator.nextFloat();
 		float lowerLimit = 0;
 		float upperLimit = (float)items.elementAt(0).getAmount(theSequence)/totalAmount;
