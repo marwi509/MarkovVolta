@@ -13,6 +13,7 @@ public class LyricsFacade {
 	private Dictionary theDictionary;
 	private LyricsCreator theLyricsCreator;
 	private int songLength = 200;
+	private String song;
 	
 	/* Standard constructor */
 	public LyricsFacade()
@@ -58,7 +59,14 @@ public class LyricsFacade {
 	{
 		theLyricsCreator.setInput(theDictionary);
 		theLyricsCreator.setSongLengt(songLength);
+		song = theLyricsCreator.toString();
 		return theLyricsCreator.toString();
+	}
+	
+	/* Write the song to a file */
+	public void toFile(String filename)
+	{
+		FileStringWriter.toFile(song, filename);
 	}
 	
 	public void setSequenceLength(int length)
