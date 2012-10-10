@@ -14,6 +14,8 @@ public class LyricsFacade {
 	private LyricsCreator theLyricsCreator;
 	private int songLength = 200;
 	private String song;
+	private int wordSequenceLength = 1;
+	private int characterSequenceLength = 4;
 	
 	/* Standard constructor */
 	public LyricsFacade()
