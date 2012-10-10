@@ -17,6 +17,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import lyricsGenerator.LyricsFacade;
+import javax.swing.JLabel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class MarkovMainFrame extends JFrame{
 	LyricsFacade theFacade;
@@ -24,6 +28,8 @@ public class MarkovMainFrame extends JFrame{
 	JList list;
 	JRadioButton rdbtnCharacter;
 	JRadioButton rdbtnWord;
+	JLabel lblNewLabel = new JLabel();
+	JSlider slider;
 	
 	public MarkovMainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,9 +71,15 @@ public class MarkovMainFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) 
 			{
 				if(rdbtnCharacter.isSelected())
+				{
+					theFacade.setCharacterSequenceLength(slider.getValue());
 					theFacade.setUseCharacter();
+				}
 				else
+				{
+					theFacade.setWordSequenceLength(slider.getValue());
 					theFacade.setUseWord();
+				}
 				int[] selected = list.getSelectedIndices();
 				for(int i = 0; i < selected.length; i ++)
 				{
@@ -90,9 +102,10 @@ public class MarkovMainFrame extends JFrame{
 		
 		JPanel panel_2 = new JPanel();
 		scrollPane.setRowHeaderView(panel_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3);
+		panel_2.add(panel_3, BorderLayout.NORTH);
 		
 		rdbtnCharacter = new JRadioButton("Character");
 		rdbtnCharacter.setSelected(true);
@@ -105,6 +118,26 @@ public class MarkovMainFrame extends JFrame{
 		btnGroup.add(rdbtnCharacter);
 		panel_3.add(rdbtnCharacter);
 		panel_3.add(rdbtnWord);
+		
+		JPanel panel_4 = new JPanel();
+		panel_2.add(panel_4, BorderLayout.SOUTH);
+		
+		slider = new JSlider();
+		slider.addChangeListener(new ChangeListener() 
+		{
+			public void stateChanged(ChangeEvent arg0) 
+			{
+				lblNewLabel.setText(""+slider.getValue());
+			}
+		});
+		slider.setValue(4);
+		slider.setSnapToTicks(true);
+		slider.setPaintTicks(true);
+		slider.setMaximum(10);
+		panel_4.add(slider);
+		
+		lblNewLabel = new JLabel(""+slider.getValue());
+		panel_4.add(lblNewLabel);
 		
 		this.setMinimumSize(new Dimension(600,300));
 		this.setVisible(true);
