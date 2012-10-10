@@ -15,7 +15,7 @@ public class LyricsFacade {
 	private Parser theParser;
 	private Dictionary theDictionary;
 	private LyricsCreator theLyricsCreator;
-	private int songLength = 200;
+	private int songLength = 20000;
 	private String song;
 	private int wordSequenceLength = 1;
 	private int characterSequenceLength = 4;
@@ -63,7 +63,7 @@ public class LyricsFacade {
 	public String generateSong()
 	{
 		theLyricsCreator.setInput(theDictionary);
-		theLyricsCreator.setSongLengt(songLength);
+		theLyricsCreator.setSongLength(songLength);
 		song = theLyricsCreator.toString();
 		return theLyricsCreator.toString();
 	}
