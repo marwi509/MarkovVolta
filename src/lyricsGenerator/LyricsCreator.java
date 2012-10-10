@@ -12,7 +12,7 @@ public class LyricsCreator {
 		createSong(songLength);
 	}
 	
-	public void setSongLengt(int theLength)
+	public void setSongLength(int theLength)
 	{
 		songLength=theLength;
 	}
