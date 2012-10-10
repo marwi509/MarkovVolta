@@ -62,8 +62,8 @@ public class LyricsFacade {
 	/* Generate a song */
 	public String generateSong()
 	{
-		theLyricsCreator.setInput(theDictionary);
 		theLyricsCreator.setSongLength(songLength);
+		theLyricsCreator.setInput(theDictionary);
 		song = theLyricsCreator.toString();
 		return theLyricsCreator.toString();
 	}
