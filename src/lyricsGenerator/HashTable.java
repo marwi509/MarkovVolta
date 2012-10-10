@@ -11,7 +11,7 @@ public class HashTable<Element extends Hashable> {
 	private Vector<LinkedList<Element>> table;
 	private int insertions = 0;
 	private int currentSize = 0;
-	private int maxSize = 1024 * 256;
+	private int maxSize = 1024 * 1024;
 	private boolean fixingSize = false;
 	
 	public HashTable()
