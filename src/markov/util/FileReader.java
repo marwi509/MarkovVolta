@@ -1,4 +1,4 @@
-package lyricsGenerator;
+package markov.util;
 
 import java.io.*;
 import java.nio.CharBuffer;
@@ -7,7 +7,7 @@ import java.nio.CharBuffer;
  * @author Steen
  *
  */
-class FileReader
+public class FileReader
 {
 	
 	private String fileContent="";

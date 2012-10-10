@@ -2,6 +2,9 @@ package lyricsGenerator;
 
 import java.util.Vector;
 
+import markov.util.FileReader;
+import markov.util.FileStringWriter;
+
 /**
  * 
  * @author Marcus Widegren
