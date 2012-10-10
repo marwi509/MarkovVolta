@@ -5,22 +5,26 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import lyricsGenerator.LyricsFacade;
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
+import markov.util.FileReader;
+import markov.util.FileStringWriter;
 
 public class MarkovMainFrame extends JFrame{
 	LyricsFacade theFacade;
@@ -30,8 +34,22 @@ public class MarkovMainFrame extends JFrame{
 	JRadioButton rdbtnWord;
 	JLabel lblNewLabel = new JLabel();
 	JSlider slider;
+	String standardDirectory = "";
+	String theFilesString = "";
 	
 	public MarkovMainFrame() {
+		if(System.getProperty("os.name").equalsIgnoreCase(new String("Linux")))
+			standardDirectory = System.getenv("HOME") + "/Dokument/Mars Volta/";
+		
+		FileReader theFileReader = new FileReader();
+		theFileReader.readFile(standardDirectory + "files.collection");
+		String theSavedFiles = theFileReader.getContent();
+		String[] Lines = theSavedFiles.split("\n");
+		for(int i = 0; i < Lines.length; i ++)
+		{
+			theFiles.add(Lines[i]);
+		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theFacade = new LyricsFacade();
 		
@@ -41,7 +59,7 @@ public class MarkovMainFrame extends JFrame{
 		getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		sourceTextField = new JTextField("/home/marcus2/Dokument/Mars Volta/");
+		sourceTextField = new JTextField(standardDirectory);
 		panel.add(sourceTextField);
 		sourceTextField.setColumns(10);
 		
@@ -51,6 +69,12 @@ public class MarkovMainFrame extends JFrame{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				theFiles.add(sourceTextField.getText());
+				theFilesString = "";
+				for(int i = 0; i < theFiles.size(); i ++)
+				{
+					theFilesString += theFiles.get(i) + "\n";
+				}
+				FileStringWriter.toFile(theFilesString, standardDirectory + "files.collection");
 				list.setListData(theFiles);
 			}
 		});
@@ -61,7 +85,7 @@ public class MarkovMainFrame extends JFrame{
 		getContentPane().add(panel_1, BorderLayout.SOUTH);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		outputTextField = new JTextField("/home/marcus2/Dokument/Mars Volta/output/guisong.txt");
+		outputTextField = new JTextField(standardDirectory + "output/guisong.txt");
 		panel_1.add(outputTextField);
 		outputTextField.setColumns(10);
 		
@@ -93,6 +117,28 @@ public class MarkovMainFrame extends JFrame{
 		panel_1.add(btnGenerate);
 		
 		list = new JList();
+		list.setListData(theFiles);
+		list.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) 
+			{
+				if(e.getKeyCode() == KeyEvent.VK_DELETE)
+				{
+					int[] index = list.getSelectedIndices();
+					for(int i = 0; i < index.length; i ++)
+					{
+						theFiles.remove(index[i]);
+					}
+					theFilesString = "";
+					for(int i = 0; i < theFiles.size(); i ++)
+					{
+						theFilesString += theFiles.get(i) + "\n";
+					}
+					FileStringWriter.toFile(theFilesString, standardDirectory + "files.collection");
+					list.setListData(theFiles);
+				}
+			}
+		});
 		JScrollPane scrollPane = new JScrollPane(list);
 		
 		
