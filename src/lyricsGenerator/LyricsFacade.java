@@ -29,7 +29,7 @@ public class LyricsFacade {
 		theParser = new CharParser();
 		theDictionary = new MarkovDictionary();
 		theLyricsCreator = new LyricsCreator();
-		Sequence.setSequenceLength(4);
+		Sequence.setSequenceLength(characterSequenceLength);
 	}
 	
 	/* Set the facade to use words */
@@ -38,7 +38,7 @@ public class LyricsFacade {
 		theParser = new WordParser();
 		theDictionary = new MarkovDictionary();
 		theLyricsCreator = new SimpleLyricsCreator();
-		Sequence.setSequenceLength(1);
+		Sequence.setSequenceLength(wordSequenceLength);
 	}
 	
 	/* Add a song to the dictionary */
@@ -71,8 +71,7 @@ public class LyricsFacade {
 		FileStringWriter.toFile(song, filename);
 	}
 	
-	public void setSequenceLength(int length)
-	{
-		Sequence.setSequenceLength(length);
-	}
+	/* Change the sequence lengths */
+	public void setWordSequenceLength(int length){ wordSequenceLength  = length;}
+	public void setCharacterSequenceLength(int length){ characterSequenceLength  = length;}
 }
