@@ -5,7 +5,7 @@ package lyricsGenerator;
 public class SequenceProb {
 	
 	private LyricsItem item;
-	private HashTable<Sequence> table = new HashTable<Sequence>();
+	private HashTable<Sequence> table = new HashTable<Sequence>(1024);
 	
 	public SequenceProb(LyricsItem theItem, final Sequence theSequence)
 	{

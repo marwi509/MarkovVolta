@@ -26,8 +26,8 @@ public class WordItem extends LyricsItem{
 	
 	public int hashCode()
 	{
-		int result=word.charAt(0);
-		for(int i=1;i<word.length();i++)
+		int result = 0;//word.charAt(0);
+		for(int i = 0;i<word.length();i++)
 		{
 			result+=word.charAt(i)*Math.pow(8,i);
 		}

@@ -8,8 +8,8 @@ public class MarkovDictionary implements Dictionary{
 
 	private Vector<SequenceProb> items = new Vector<SequenceProb>();
 	private Sequence theSequence = new Sequence();
-	private HashTable<Sequence> table = new HashTable<Sequence>();
-	private HashTable<Pair> theItemTable = new HashTable<Pair>();
+	private HashTable<Sequence> table = new HashTable<Sequence>(1024 * 16);
+	private HashTable<Pair> theItemTable = new HashTable<Pair>(1024 * 16);
 	private Random randomGenerator = new Random();
 	
 	@Override
@@ -18,6 +18,8 @@ public class MarkovDictionary implements Dictionary{
 		theSequence = new Sequence();
 		for(int i=0;i<theVector.size();i++)
 		{
+			if(i%1000 == 0)
+				System.out.println("Item " + i + " of " + theVector.size());
 			Pair tempPair = theItemTable.contains(new Pair(theVector.get(i), 0));
 			//int alreadyExists = theItemTable.contains(new Pair(theVector.get(i), 0));
 			boolean found = false;

@@ -40,10 +40,10 @@ public class Sequence implements Hashable{
 	{
 		if(items.isEmpty())
 			return 0;
-		int result=items.get(0).hashCode();
-		for(int i=1;i<items.size();i++)
+		int result = 0;//items.get(0).hashCode();
+		for(int i=0;i<items.size();i++)
 		{
-			result+=items.get(i).hashCode()*Math.pow(8,i);
+			result+=items.get(i).hashCode()*Math.pow(1024,i);
 		}
 		return result;
 	}
