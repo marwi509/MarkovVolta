@@ -14,17 +14,17 @@ public class HashTable<Element extends Hashable> {
 	private int maxSize = 1024 * 1024;
 	private boolean fixingSize = false;
 	
-	public HashTable()
+	public HashTable(int startSize)
 	{
-		table = new Vector<LinkedList<Element>>(512);
-		table.setSize(512);
-		currentSize = 512;
+		table = new Vector<LinkedList<Element>>(startSize);
+		table.setSize(startSize);
+		currentSize = startSize;
 	}
 	
 	private void FixSize()
 	{
 		fixingSize = true;
-		if((insertions  > currentSize && currentSize * 2 <= maxSize))
+		if((insertions * 4 > currentSize && currentSize * 2 <= maxSize))
 		{
 			Vector<LinkedList<Element> > tempVector = table;
 			table = new Vector<LinkedList<Element>>(currentSize * 2);
@@ -44,7 +44,13 @@ public class HashTable<Element extends Hashable> {
 					}
 				}
 			}
-			
+			for(int i = 0; i < tempVector.size(); i ++)
+			{
+				if(tempVector.get(i) != null)
+					tempVector.get(i).clear();
+			}
+			tempVector.clear();
+
 		}
 		fixingSize = false;
 	}
