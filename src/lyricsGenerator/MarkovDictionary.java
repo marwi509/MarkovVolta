@@ -26,6 +26,7 @@ public class MarkovDictionary implements Dictionary{
 			if(tempPair != null)
 			{
 				items.get(tempPair.getAmount()).addSequence(theSequence);
+				found = true;
 			}
 			if(!found)
 			{
