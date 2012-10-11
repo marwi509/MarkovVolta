@@ -21,10 +21,9 @@ public class Sequence implements Hashable{
 	}
 	public void push(LyricsItem theItem)
 	{
-		if(items.size() >= sequenceLength)
-			items.removeFirst();
-		
 		items.add(theItem);
+		if(items.size() > sequenceLength)
+			items.removeFirst();
 	}
 	
 	public void increment()
