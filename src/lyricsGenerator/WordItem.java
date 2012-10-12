@@ -29,7 +29,7 @@ public class WordItem extends LyricsItem{
 		int result = 0;//word.charAt(0);
 		for(int i = 0;i<word.length();i++)
 		{
-			result+=word.charAt(i)*Math.pow(8,i);
+			result+=word.charAt(i)*Math.pow(2,i+3);
 		}
 		return result;
 	}

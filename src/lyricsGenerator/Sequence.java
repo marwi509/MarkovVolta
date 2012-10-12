@@ -42,7 +42,7 @@ public class Sequence implements Hashable{
 		int result = 0;//items.get(0).hashCode();
 		for(int i=0;i<items.size();i++)
 		{
-			result+=items.get(i).hashCode()*Math.pow(1024,i);
+			result+=items.get(i).hashCode()*Math.pow(2,i+6);
 		}
 		return result;
 	}

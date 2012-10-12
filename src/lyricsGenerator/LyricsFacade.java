@@ -15,7 +15,7 @@ public class LyricsFacade {
 	private Parser theParser;
 	private Dictionary theDictionary;
 	private LyricsCreator theLyricsCreator;
-	private int songLength = 100000;
+	private int songLength = 10000;
 	private String song;
 	private int wordSequenceLength = 1;
 	private int characterSequenceLength = 4;

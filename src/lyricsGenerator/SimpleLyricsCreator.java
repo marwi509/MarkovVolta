@@ -3,8 +3,8 @@ package lyricsGenerator;
 
 public class SimpleLyricsCreator extends LyricsCreator{
 	
-	private int charsPerRow = 20;
-	private int rowsPerParagraph = 3;
+	private int charsPerRow = 40;
+	private int rowsPerParagraph = 4;
 	
 	@Override
 	public void printSong(String filename) {
