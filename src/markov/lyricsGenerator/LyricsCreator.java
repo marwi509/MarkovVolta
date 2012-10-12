@@ -26,9 +26,18 @@ public class LyricsCreator {
 	}
 	protected void createSong(int theLength)
 	{
-		while(song.length() < theLength)
-		song+=theDictionary.getItem();
-		
+		int counter = 0;
+		StringBuilder theBuilder = new StringBuilder();
+		while(theBuilder.length() < theLength)
+		{
+			if(theBuilder.length() > counter * 1000 -1)
+			{
+				counter++;
+				System.out.println("Character " + theBuilder.length() + " of " + theLength + ".");
+			}
+			theBuilder.append(theDictionary.getItem());
+		}
+		song = theBuilder.toString();
 	}
 	
 }
