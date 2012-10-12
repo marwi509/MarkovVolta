@@ -1,4 +1,4 @@
-package lyricsGenerator;
+package markov.lyricsGenerator;
 
 
 public abstract class LyricsItem implements Hashable{

@@ -1,4 +1,4 @@
-package gui;
+package markov.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import lyricsGenerator.LyricsFacade;
+import markov.lyricsGenerator.LyricsFacade;
 import markov.util.FileReader;
 import markov.util.FileStringWriter;
 

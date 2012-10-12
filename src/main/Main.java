@@ -1,6 +1,6 @@
 package main;
 
-import gui.MarkovMainFrame;
+import markov.gui.MarkovMainFrame;
 
 public class Main {
 	public static void main(String[] args)

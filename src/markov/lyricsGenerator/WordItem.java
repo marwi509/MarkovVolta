@@ -1,4 +1,4 @@
-package lyricsGenerator;
+package markov.lyricsGenerator;
 
 public class WordItem extends LyricsItem{
 
