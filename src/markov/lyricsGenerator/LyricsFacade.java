@@ -2,8 +2,8 @@ package markov.lyricsGenerator;
 
 import java.util.Vector;
 
-import markov.util.FileReader;
-import markov.util.FileStringWriter;
+import markov.util.io.FileReader;
+import markov.util.io.FileStringWriter;
 
 /**
  * 
@@ -15,7 +15,7 @@ public class LyricsFacade {
 	private Parser theParser;
 	private Dictionary theDictionary;
 	private LyricsCreator theLyricsCreator;
-	private int songLength = 10000;
+	private int songLength = 40000;
 	private String song;
 	private int wordSequenceLength = 1;
 	private int characterSequenceLength = 4;
@@ -65,7 +65,7 @@ public class LyricsFacade {
 		theLyricsCreator.setSongLength(songLength);
 		theLyricsCreator.setInput(theDictionary);
 		song = theLyricsCreator.toString();
-		return theLyricsCreator.toString();
+		return song;
 	}
 	
 	/* Write the song to a file */

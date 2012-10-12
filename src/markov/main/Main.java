@@ -1,4 +1,4 @@
-package main;
+package markov.main;
 
 import markov.gui.MarkovMainFrame;
 

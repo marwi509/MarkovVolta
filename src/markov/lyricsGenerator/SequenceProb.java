@@ -1,5 +1,7 @@
 package markov.lyricsGenerator;
 
+import markov.util.HashTable;
+
 
 
 public class SequenceProb {

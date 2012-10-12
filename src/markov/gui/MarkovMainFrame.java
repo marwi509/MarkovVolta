@@ -22,9 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import markov.util.io.FileReader;
+import markov.util.io.FileStringWriter;
 import markov.lyricsGenerator.LyricsFacade;
-import markov.util.FileReader;
-import markov.util.FileStringWriter;
 
 public class MarkovMainFrame extends JFrame{
 	LyricsFacade theFacade;

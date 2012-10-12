@@ -1,4 +1,4 @@
-package markov.lyricsGenerator;
+package markov.util;
 
 
 import java.util.LinkedList;

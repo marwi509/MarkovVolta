@@ -1,4 +1,4 @@
-package markov.util;
+package markov.util.io;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;

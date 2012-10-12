@@ -1,5 +1,7 @@
 package markov.lyricsGenerator;
 
+import markov.util.Hashable;
+import markov.util.Comparable;
 
 public class Pair implements Hashable{
 	

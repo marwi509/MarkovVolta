@@ -2,6 +2,9 @@ package markov.lyricsGenerator;
 
 import java.util.LinkedList;
 
+import markov.util.Hashable;
+import markov.util.Comparable;
+
 
 public class Sequence implements Hashable{
 

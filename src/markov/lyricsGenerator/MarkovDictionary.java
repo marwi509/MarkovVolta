@@ -3,6 +3,8 @@ package markov.lyricsGenerator;
 import java.util.Random;
 import java.util.Vector;
 
+import markov.util.HashTable;
+
 
 public class MarkovDictionary implements Dictionary{
 
@@ -18,7 +20,7 @@ public class MarkovDictionary implements Dictionary{
 		theSequence = new Sequence();
 		for(int i=0;i<theVector.size();i++)
 		{
-			if(i%1000 == 0)
+			if(i % 10000 == 0)
 				System.out.println("Item " + i + " of " + theVector.size());
 			Pair tempPair = theItemTable.contains(new Pair(theVector.get(i), 0));
 			//int alreadyExists = theItemTable.contains(new Pair(theVector.get(i), 0));

@@ -1,5 +1,7 @@
 package markov.lyricsGenerator;
 
+import markov.util.Hashable;
+import markov.util.Comparable;
 
 public abstract class LyricsItem implements Hashable{
 	public abstract LyricsItem copyMe();
