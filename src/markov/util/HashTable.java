@@ -6,7 +6,7 @@ import java.util.ListIterator;
 import java.util.Vector;
 
 
-public class HashTable<Element extends Hashable> {
+public class HashTable<Element extends Hashable> implements Table<Element>{
 	
 	private Vector<LinkedList<Element>> table;
 	private int insertions = 0;
