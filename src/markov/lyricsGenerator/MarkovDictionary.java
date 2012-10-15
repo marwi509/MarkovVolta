@@ -20,17 +20,16 @@ public class MarkovDictionary implements Dictionary{
 		theSequence = new Sequence();
 		for(int i=0;i<theVector.size();i++)
 		{
-			if(i % 10000 == 0)
+			if(i % 50000 == 0)
 				System.out.println("Item " + i + " of " + theVector.size());
 			Pair tempPair = theItemTable.contains(new Pair(theVector.get(i), 0));
 			//int alreadyExists = theItemTable.contains(new Pair(theVector.get(i), 0));
-			boolean found = false;
+			
 			if(tempPair != null)
 			{
 				items.get(tempPair.getAmount()).addSequence(theSequence);
-				found = true;
 			}
-			if(!found)
+			else
 			{
 				theItemTable.insert(new Pair(theVector.get(i), items.size()));
 				items.add(new SequenceProb(theVector.get(i),theSequence));

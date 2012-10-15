@@ -1,7 +1,9 @@
 package markov.util.io;
 
-import java.io.*;
-import java.nio.CharBuffer;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 /**
  * Reads a file and puts the content in a String
  * @author Steen
