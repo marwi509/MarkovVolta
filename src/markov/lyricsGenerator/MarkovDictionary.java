@@ -17,7 +17,7 @@ public class MarkovDictionary implements Dictionary{
 		theSequence = new Sequence();
 		for(int i=0;i<theVector.size();i++)
 		{
-			if(i % 50000 == 0)
+			if(i % 100000 == 0)
 				System.out.println("Item " + i + " of " + theVector.size());	
 			SequenceList theSList = theSequenceListTable.insert(new SequenceList(theSequence));
 			theSList.addItem(theVector.get(i));
@@ -36,14 +36,16 @@ public class MarkovDictionary implements Dictionary{
 			return getItem();
 		}
 		int randNumber = randomGenerator.nextInt(theSList.insertions());
+		int sum = 0;
 		
 		for(int i = 0; i < theSList.size(); i ++)
 		{
-			if(randNumber < theSList.getItemNumber(i).getAmount())
+			if(randNumber < theSList.getItemNumber(i).getAmount() + sum)
 			{
 				theSequence.push(theSList.getItemNumber(i).getItem());
 				return theSList.getItemNumber(i).getItem();
 			}
+			sum += theSList.getItemNumber(i).getAmount();
 		}
 		theSequence.push(theSList.getItemNumber(theSList.size() - 1).getItem());
 		return theSList.getItemNumber(theSList.size() - 1).getItem();
