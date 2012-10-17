@@ -18,7 +18,7 @@ public class CharacterItem extends LyricsItem{
 	 */
 	public CharacterItem(String c)
 	{
-		if(!c.isEmpty())
+		if(c.length()!=0)
 		{
 			character = new String();
 			character+=c.charAt(0);

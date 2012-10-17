@@ -5,7 +5,7 @@ public class WordItem extends LyricsItem{
 	private String word;
 	public WordItem(String c)
 	{
-		if(!c.isEmpty())
+		if(c.length()!=0)
 		{
 			word = new String(c);
 		}
