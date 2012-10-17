@@ -18,7 +18,7 @@ public class SequenceList implements Hashable{
 	{
 		theSequence = theSequenceIn.copyMe();
 		theList = new Vector<Pair>();
-		theListIndices = new HashTable<Pair>(64);
+		theListIndices = new HashTable<Pair>(2);
 	}
 	
 	public void addItem(LyricsItem theItem)

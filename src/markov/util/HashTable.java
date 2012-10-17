@@ -24,7 +24,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 	private void FixSize()
 	{
 		fixingSize = true;
-		if((insertions * 4 > currentSize && currentSize * 2 <= maxSize))
+		if((insertions > currentSize && currentSize * 2 <= maxSize))
 		{
 			Vector<LinkedList<Element> > tempVector = table;
 			table = new Vector<LinkedList<Element>>(currentSize * 2);

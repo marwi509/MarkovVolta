@@ -8,7 +8,7 @@ import markov.util.HashTable;
 
 public class MarkovDictionary implements Dictionary{
 	private Sequence theSequence = new Sequence();
-	private HashTable<SequenceList> theSequenceListTable = new HashTable<SequenceList>(1024 * 1024);
+	private HashTable<SequenceList> theSequenceListTable = new HashTable<SequenceList>(2);
 	private Random randomGenerator = new Random();
 	
 	@Override
