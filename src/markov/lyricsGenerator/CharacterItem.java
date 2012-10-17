@@ -8,7 +8,7 @@ package markov.lyricsGenerator;
 
 public class CharacterItem extends LyricsItem{
 
-	private char character;
+	private byte character;
 	
 	/**
 	 * CharacterItem(String c)
@@ -20,7 +20,7 @@ public class CharacterItem extends LyricsItem{
 	{
 		if(c.length() != 0)
 		{
-			character = c.charAt(0);
+			character = (byte)c.charAt(0);
 		}
 	}
 	/**
@@ -30,7 +30,7 @@ public class CharacterItem extends LyricsItem{
 	 */
 	public CharacterItem copyMe()
 	{
-		CharacterItem tempItem = new CharacterItem(new String(""+character));
+		CharacterItem tempItem = new CharacterItem(new String("" + (char)character));
 		return tempItem;
 	}
 	
@@ -52,7 +52,7 @@ public class CharacterItem extends LyricsItem{
 	}
 	
 	public String toString() {
-		return new String("" + character);
+		return new String("" + (char)character);
 	}
 
 }
