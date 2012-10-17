@@ -63,7 +63,7 @@ public class Sequence implements Hashable{
 		Iterator<LyricsItem> theOtherIter = theSequence.getList().iterator();
 		while(theIter.hasNext())
 		{
-			if(theIter.next().equals(theOtherIter.next()))
+			if(!theIter.next().equals(theOtherIter.next()))
 				return false;
 		}
 		return true;
