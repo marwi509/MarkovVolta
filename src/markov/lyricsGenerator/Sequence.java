@@ -1,5 +1,6 @@
 package markov.lyricsGenerator;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import markov.util.Comparable;
@@ -15,9 +16,10 @@ public class Sequence implements Hashable{
 	public Sequence copyMe()
 	{
 		Sequence tempSequence = new Sequence();
-		for(int i=0;i<items.size();i++)
+		Iterator<LyricsItem> theIter = items.iterator();
+		while(theIter.hasNext())
 		{
-			tempSequence.push(items.get(i).copyMe());
+			tempSequence.push(theIter.next());
 		}
 		tempSequence.setAmount(amount);
 		return tempSequence;
@@ -43,9 +45,11 @@ public class Sequence implements Hashable{
 		if(items.isEmpty())
 			return 0;
 		int result = 0;//items.get(0).hashCode();
-		for(int i=0;i<items.size();i++)
+		Iterator<LyricsItem> theIter = items.iterator(); 
+		int counter = 0;
+		while(theIter.hasNext())
 		{
-			result+=items.get(i).hashCode()*Math.pow(2,i+6);
+			result += theIter.next().hashCode()*Math.pow(2,counter+++6);
 		}
 		return result;
 	}
@@ -70,9 +74,11 @@ public class Sequence implements Hashable{
 		if(items.size()!=otherItems.size())
 			return false;
 		
-		for(int i=0;i<items.size();i++) // Compare each element in the list
+		Iterator<LyricsItem> theIter = items.iterator();
+		Iterator<LyricsItem> theOtherIter = theSequence.getList().iterator();
+		while(theIter.hasNext())
 		{
-			if(!items.get(i).equals(otherItems.get(i)))
+			if(theIter.next().equals(theOtherIter.next()))
 				return false;
 		}
 		return true;
@@ -80,9 +86,10 @@ public class Sequence implements Hashable{
 	public String toString()
 	{
 		String returnString="";
-		for(int i=0;i<items.size();i++)
+		Iterator<LyricsItem> theIter = items.iterator();
+		while(theIter.hasNext())
 		{
-			returnString+=items.get(i);
+			returnString += theIter.next();
 		}
 		return returnString;
 	}
