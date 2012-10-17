@@ -21,6 +21,13 @@ public class SequenceList implements Hashable{
 		theListIndices = new HashTable<Pair>(2);
 	}
 	
+	public SequenceList(Sequence theSequenceIn, Vector<Pair> theListIn, Table<Pair> theTableIn)
+	{
+		theSequence = theSequenceIn.copyMe();
+		theList = theListIn;
+		theListIndices = theTableIn;
+	}
+	
 	public void addItem(LyricsItem theItem)
 	{
 		insertions++;
@@ -62,7 +69,7 @@ public class SequenceList implements Hashable{
 
 	@Override
 	public Copyable copyMe() {
-		SequenceList sequenceOut = new SequenceList(theSequence);
+		SequenceList sequenceOut = new SequenceList(theSequence, theList, theListIndices);
 		return sequenceOut;
 	}
 
