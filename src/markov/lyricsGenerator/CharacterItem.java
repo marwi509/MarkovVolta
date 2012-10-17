@@ -48,7 +48,7 @@ public class CharacterItem extends LyricsItem{
 	
 	public int hashCode()
 	{
-		return (int)character;
+		return (int)character + 127;
 	}
 	
 	public String toString() {
