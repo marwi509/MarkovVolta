@@ -29,7 +29,7 @@ public class FileReader
 			String theLine;
 			
 			// Allocate a stringbuilder, this is much faster than appending a string
-			StringBuilder theBuffer = new StringBuilder(100000000);
+			StringBuilder theBuffer = new StringBuilder(bufferSize);
 			while((theLine = br.readLine()) != null)
 			{
 				theBuffer.append(theLine + '\n');
