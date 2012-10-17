@@ -2,12 +2,13 @@ package markov.lyricsGenerator;
 
 public class WordItem extends LyricsItem{
 
-	private String word;
+	private char[] word;
 	public WordItem(String c)
 	{
 		if(c.length()!=0)
 		{
-			word = new String(c);
+			word = new char[c.length()];
+			word = c.toCharArray();
 		}
 	}
 	
@@ -27,16 +28,14 @@ public class WordItem extends LyricsItem{
 	public int hashCode()
 	{
 		int result = 0;//word.charAt(0);
-		for(int i = 0;i<word.length();i++)
+		for(int i = 0; i < word.length; i++)
 		{
-			result+=word.charAt(i)*Math.pow(2,i+3);
+			result += word[i] * Math.pow(2,i+3);
 		}
 		return result;
 	}
 	
 	public String toString() {
-		return word+" ";
+		return new String(word) + " ";
 	}
-
-
 }
