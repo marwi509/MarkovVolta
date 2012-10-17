@@ -11,7 +11,6 @@ public class Sequence implements Hashable{
 
 	private LinkedList<LyricsItem> items = new LinkedList<LyricsItem>();
 	private static int sequenceLength = 4;
-	private int amount = 0;
 	
 	public Sequence copyMe()
 	{
@@ -21,7 +20,6 @@ public class Sequence implements Hashable{
 		{
 			tempSequence.push(theIter.next());
 		}
-		tempSequence.setAmount(amount);
 		return tempSequence;
 	}
 	public void push(LyricsItem theItem)
@@ -31,10 +29,6 @@ public class Sequence implements Hashable{
 			items.removeFirst();
 	}
 	
-	public void increment()
-	{
-		amount++;
-	}
 	public static void setSequenceLength(int theLength)
 	{
 		sequenceLength = theLength;
@@ -52,15 +46,6 @@ public class Sequence implements Hashable{
 			result += theIter.next().hashCode()*Math.pow(2,counter+++6);
 		}
 		return result;
-	}
-	
-	public int getAmount()
-	{
-		return amount;
-	}
-	public void setAmount(int amountIn)
-	{
-		amount = amountIn;
 	}
 	
 	public LinkedList<LyricsItem> getList()
