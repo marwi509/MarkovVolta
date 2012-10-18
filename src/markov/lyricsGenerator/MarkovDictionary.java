@@ -1,5 +1,6 @@
 package markov.lyricsGenerator;
 
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
@@ -37,18 +38,20 @@ public class MarkovDictionary implements Dictionary{
 		}
 		int randNumber = randomGenerator.nextInt(theSList.insertions());
 		int sum = 0;
-		
-		for(int i = 0; i < theSList.size(); i ++)
+		Iterator<Pair> theIterator = theSList.iterator();
+		Pair tempPair = null;
+		while(theIterator.hasNext())
 		{
-			if(randNumber < theSList.getItemNumber(i).getAmount() + sum)
+			tempPair = theIterator.next();
+			if(randNumber < tempPair.getAmount() + sum)
 			{
-				theSequence.push(theSList.getItemNumber(i).getItem());
-				return theSList.getItemNumber(i).getItem();
+				theSequence.push(tempPair.getItem());
+				return tempPair.getItem();
 			}
-			sum += theSList.getItemNumber(i).getAmount();
+			sum += tempPair.getAmount();
 		}
-		theSequence.push(theSList.getItemNumber(theSList.size() - 1).getItem());
-		return theSList.getItemNumber(theSList.size() - 1).getItem();
+		theSequence.push(tempPair.getItem());
+		return tempPair.getItem();
 	}
 
 }

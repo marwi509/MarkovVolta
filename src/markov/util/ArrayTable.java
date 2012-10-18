@@ -1,5 +1,6 @@
 package markov.util;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 public class ArrayTable<Element extends Copyable & Comparable> implements Table<Element>{
@@ -33,6 +34,11 @@ public class ArrayTable<Element extends Copyable & Comparable> implements Table<
 		}
 		theList.add((Element)theElement.copyMe());
 		return theList.get(theList.size()-1);
+	}
+
+	@Override
+	public Iterator<Element> iterator() {
+		return theList.iterator();
 	}
 
 }

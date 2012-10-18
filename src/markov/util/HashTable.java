@@ -1,6 +1,7 @@
 package markov.util;
 
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Vector;
@@ -106,5 +107,52 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 				return temp;
 		}
 		return null;
+	}
+	
+	private class HashIterator implements Iterator<Element>
+	{
+		int index = 0;
+		Iterator<Element> theLocalIterator;
+		
+		@Override
+		public boolean hasNext() {
+			if(theLocalIterator == null)
+			{
+				if(table.get(index) != null)
+				{
+					theLocalIterator = table.get(index).iterator();
+				}
+			}
+			if(theLocalIterator != null && theLocalIterator.hasNext() == true)
+				return true;
+			for(int i = index + 1; i < table.size(); i ++)
+			{
+				if(table.get(i) != null)
+				{
+					index = i;
+					theLocalIterator = table.get(i).iterator();
+					return true;
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public Element next() {
+			hasNext();
+			return theLocalIterator.next();
+		}
+
+		@Override
+		public void remove() {
+			// Stub
+			
+		}
+		
+	}
+
+	@Override
+	public Iterator<Element> iterator() {
+		return this.new HashIterator();
 	}
 }
