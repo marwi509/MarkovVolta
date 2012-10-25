@@ -120,7 +120,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 			{
 				if(table.get(index) != null)
 				{
-					theLocalIterator = table.get(index).iterator();
+					theLocalIterator = table.get(index).listIterator();
 				}
 			}
 			if(theLocalIterator != null && theLocalIterator.hasNext() == true)
@@ -130,7 +130,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 				if(table.get(i) != null)
 				{
 					index = i;
-					theLocalIterator = table.get(i).iterator();
+					theLocalIterator = table.get(i).listIterator();
 					return true;
 				}
 			}
