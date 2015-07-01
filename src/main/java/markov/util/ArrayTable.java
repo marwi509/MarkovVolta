@@ -13,11 +13,9 @@ public class ArrayTable<Element extends Copyable & Comparable> implements Table<
 	
 	@Override
 	public Element contains(Element theElement) {
-		for(int i = 0; i < theList.size(); i ++)
-		{
-			if(theElement.equals(theList.get(i)))
-			{
-				return theList.get(i);
+		for (Element aTheList : theList) {
+			if (theElement.equals(aTheList)) {
+				return aTheList;
 			}
 		}
 		return null;
@@ -25,11 +23,9 @@ public class ArrayTable<Element extends Copyable & Comparable> implements Table<
 
 	@Override
 	public Element insert(Element theElement) {
-		for(int i = 0; i < theList.size(); i ++)
-		{
-			if(theElement.equals(theList.get(i)))
-			{
-				return theList.get(i);
+		for (Element aTheList : theList) {
+			if (theElement.equals(aTheList)) {
+				return aTheList;
 			}
 		}
 		theList.add((Element)theElement.copyMe());

@@ -4,7 +4,7 @@ import java.util.*;
 
 public class HashSetTable<Element extends Hashable> implements Table<Element>{
 
-    private final Map<Integer, Element> set = new HashMap<>(10000);
+    private final Map<Integer, Element> set = new HashMap<>();
 
     @Override
     public Element contains(Element theElement) {

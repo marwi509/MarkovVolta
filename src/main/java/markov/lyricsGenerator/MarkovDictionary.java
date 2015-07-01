@@ -36,7 +36,9 @@ public class MarkovDictionary implements Dictionary{
 		SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
 		if(theSList == null)
 		{
-			throw new RuntimeException("WHAT?!");
+			//throw new RuntimeException("WHAT?!");
+			theSequence = new Sequence();
+            return getItem();
 		}
 		int randNumber = randomGenerator.nextInt(theSList.insertions());
 		int sum = 0;
