@@ -8,7 +8,7 @@ public class ArrayTable<Element extends Copyable & Comparable> implements Table<
 	
 	public ArrayTable()
 	{
-		theList = new Vector<Element>();
+		theList = new Vector<>();
 	}
 	
 	@Override

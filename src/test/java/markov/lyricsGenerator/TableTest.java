@@ -2,7 +2,9 @@ package markov.lyricsGenerator;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import markov.util.ArrayTable;
 import markov.util.HashTable;
@@ -23,14 +25,14 @@ public class TableTest {
 	@Test
 	public void testHash()
 	{
-		theTable = new HashTable<LyricsItem>(1024);
+		theTable = new HashTable<>(1024);
 		tableTest();
 	}
 	
 	@Test
 	public void arrayTest()
 	{
-		theTable = new ArrayTable<LyricsItem>();
+		theTable = new ArrayTable<>();
 		tableTest();
 	}
 
@@ -40,6 +42,15 @@ public class TableTest {
         theTable = new HashSetTable<>();
         tableTest();
     }
+
+    @Test
+    public void what() {
+        Set<Character> set = new HashSet<>();
+        set.add('a');
+
+        assertTrue(set.contains('a'));
+    }
+
 
 	public void tableTest()
 	{

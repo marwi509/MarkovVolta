@@ -1,5 +1,7 @@
 package markov.lyricsGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -12,7 +14,7 @@ import java.util.Vector;
  */
 public class CharDictionary implements Dictionary{
 
-	private Vector<Pair> theDictionary = new Vector<Pair>(); // The dictionary with characters and number of occurrences.
+	private List<Pair> theDictionary = new ArrayList<>(); // The dictionary with characters and number of occurrences.
 	private int totalItems = 0;
 	private Random randomGenerator = new Random();
 	/**
@@ -21,12 +23,12 @@ public class CharDictionary implements Dictionary{
 	 * @param theVector - A Vector containing LyricsItems
 	 */
 	@Override
-	public void addItemVector(Vector<LyricsItem> theVector) {
+	public void addItemVector(List<LyricsItem> theVector) {
 		
 		for(int i=0;i<theVector.size();i++)
 		{
 			//System.out.println(theVector.elementAt(i));
-			addItem(theVector.elementAt(i));
+			addItem(theVector.get(i));
 		}
 	}
 	/**
@@ -40,9 +42,9 @@ public class CharDictionary implements Dictionary{
 		boolean itemFound=false;
 		for(int i=0;i<theDictionary.size();i++)
 		{
-			if(item.equals(theDictionary.elementAt(i)))
+			if(item.equals(theDictionary.get(i)))
 			{
-				theDictionary.elementAt(i).addAmount(1);
+				theDictionary.get(i).addAmount(1);
 				break;
 			}
 				
@@ -62,7 +64,7 @@ public class CharDictionary implements Dictionary{
 	public LyricsItem getItem() {
 		float randomNumber = randomGenerator.nextFloat();
 		float lowerLimit = 0;
-		float upperLimit = (float)theDictionary.elementAt(0).getAmount()/(float)totalItems;
+		float upperLimit = (float)theDictionary.get(0).getAmount()/(float)totalItems;
 		
 		// Create an upper an lower limit using the number of occurrences of each
 		// character. If the random number is inbetween these values, return the
@@ -71,14 +73,14 @@ public class CharDictionary implements Dictionary{
 		{
 			
 			if(randomNumber > lowerLimit && randomNumber < upperLimit)
-				return theDictionary.elementAt(i).getItem();
+				return theDictionary.get(i).getItem();
 			
-			lowerLimit+=(float)theDictionary.elementAt(i).getAmount()/(float)totalItems;
-			upperLimit=lowerLimit+(float)theDictionary.elementAt(i+1).getAmount()/(float)totalItems;
+			lowerLimit+=(float)theDictionary.get(i).getAmount()/(float)totalItems;
+			upperLimit=lowerLimit+(float)theDictionary.get(i + 1).getAmount()/(float)totalItems;
 			
 			
 		}
-		return theDictionary.lastElement().getItem();
+		return theDictionary.get(theDictionary.size() - 1).getItem();
 	}
 
 	

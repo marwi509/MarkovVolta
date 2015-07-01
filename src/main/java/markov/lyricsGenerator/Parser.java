@@ -1,9 +1,9 @@
 package markov.lyricsGenerator;
 
-import java.util.Vector;
+import java.util.List;
 
 
 public abstract interface Parser {
 
-	public abstract Vector<LyricsItem> parse(String theString);
+	List<LyricsItem> parse(String theString);
 }

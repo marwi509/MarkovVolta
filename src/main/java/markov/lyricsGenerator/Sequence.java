@@ -13,10 +13,8 @@ public class Sequence implements Hashable{
 
 	private List<LyricsItem> items = new ArrayList<>();
 	private static int sequenceLength = 4;
-    private boolean hashSaved = false;
-    private int hashCache = 0;
-	
-	public Sequence copyMe()
+
+    public Sequence copyMe()
 	{
 		Sequence tempSequence = new Sequence();
 		Iterator<LyricsItem> theIter = items.iterator();

@@ -5,7 +5,7 @@ import markov.util.Hashable;
 
 public class Pair implements Hashable{
 	
-	private LyricsItem item;
+	private final LyricsItem item;
 	private int amount;
 	
 	public Pair(LyricsItem theItem,int theInt)
@@ -37,8 +37,7 @@ public class Pair implements Hashable{
 	@Override
 	public int hashCode()
 	{
-		int res = item.hashCode();
-		return res > 0 ? res : res * -1;
+		return item.hashCode();
 	}
 	
 	@Override

@@ -71,7 +71,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 		if(table.get(hashValue)==null)
 		{
 			
-			List<Element> tempVector = new ArrayList<Element>();
+			List<Element> tempVector = new ArrayList<>();
 			tempVector.add((Element)theElement.copyMe());
 			//table.add(hashValue, tempVector);
 			addToTable(tempVector, hashValue);
@@ -80,13 +80,10 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 		}
 		else
 		{
-			ListIterator<Element> iter = table.get(hashValue).listIterator();
-			while(iter.hasNext())
-			{
-				Element temp = iter.next();
-				if(temp.equals(theElement))
-					return temp;
-			}
+            for (Element temp : table.get(hashValue)) {
+                if (temp.equals(theElement))
+                    return temp;
+            }
 
 			table.get(hashValue).add((Element)theElement.copyMe());
 			insertions++;
@@ -110,14 +107,11 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 		{
 			return null;
 		}
-		
-		ListIterator<Element> iter = table.get(index).listIterator();
-		while(iter.hasNext())
-		{
-			Element temp = iter.next();
-			if(temp.equals(theElement))
-				return temp;
-		}
+
+        for (Element temp : table.get(index)) {
+            if (temp.equals(theElement))
+                return temp;
+        }
 		return null;
 	}
 	
@@ -135,7 +129,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 					theLocalIterator = table.get(index).listIterator();
 				}
 			}
-			if(theLocalIterator != null && theLocalIterator.hasNext() == true)
+			if(theLocalIterator != null && theLocalIterator.hasNext())
 				return true;
 			for(int i = index + 1; i < table.size(); i ++)
 			{

@@ -1,11 +1,12 @@
 package markov.lyricsGenerator;
 
+import java.util.List;
 import java.util.Vector;
 
 
-public abstract interface Dictionary {
+public interface Dictionary {
 
-	public abstract void addItemVector(Vector<LyricsItem> theVector);
-	public abstract LyricsItem getItem();
+	void addItemVector(List<LyricsItem> theVector);
+	LyricsItem getItem();
 	
 }

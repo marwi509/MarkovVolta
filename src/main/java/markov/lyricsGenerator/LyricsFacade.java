@@ -1,5 +1,6 @@
 package markov.lyricsGenerator;
 
+import java.util.List;
 import java.util.Vector;
 
 import markov.util.io.FileReader;
@@ -52,7 +53,7 @@ public class LyricsFacade {
 		System.out.println("File read.");
 		
 		String fileContent = theFileReader.toString();
-		Vector<LyricsItem> theItems = theParser.parse(fileContent);
+		List<LyricsItem> theItems = theParser.parse(fileContent);
 		System.out.println("File content parsed.");
 		
 		theDictionary.addItemVector(theItems);

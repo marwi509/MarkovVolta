@@ -1,28 +1,26 @@
 package markov.util;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class HashSetTable<Element extends Hashable> implements Table<Element>{
 
-    private final Set<Element> set = new HashSet<>();
+    private final Map<Integer, Element> set = new HashMap<>(10000);
 
     @Override
     public Element contains(Element theElement) {
-        if(set.contains(theElement)) return theElement;
-        else return null;
+        return set.get(theElement.hashCode());
     }
 
     @Override
     public Element insert(Element theElement) {
         Element el = (Element) theElement.copyMe();
-        set.add(el);
-        return theElement;
+        set.put(el.hashCode(), el);
+        return set.get(el.hashCode());
     }
 
     @Override
     public Iterator<Element> iterator() {
-        return set.iterator();
+        return set.values().iterator();
     }
 }
+

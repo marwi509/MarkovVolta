@@ -1,6 +1,7 @@
 package markov.lyricsGenerator;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -12,13 +13,13 @@ import markov.util.Table;
 public class MarkovDictionary implements Dictionary{
 	private Sequence theSequence = new Sequence();
 	private Table<SequenceList> theSequenceListTable = new HashTable<>(2);
-	private Random randomGenerator = new Random();
+	private final Random randomGenerator = new Random();
 	
 	@Override
-	public void addItemVector(Vector<LyricsItem> theVector) 
+	public void addItemVector(List<LyricsItem> theVector)
 	{
 		theSequence = new Sequence();
-		for(int i=0;i<theVector.size();i++)
+		for(int i = 0; i < theVector.size(); i ++)
 		{
 			if(i % 100000 == 0)
 				System.out.println("Item " + i + " of " + theVector.size());	
@@ -35,8 +36,7 @@ public class MarkovDictionary implements Dictionary{
 		SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
 		if(theSList == null)
 		{
-			theSequence = new Sequence();
-			return getItem();
+			throw new RuntimeException("WHAT?!");
 		}
 		int randNumber = randomGenerator.nextInt(theSList.insertions());
 		int sum = 0;
