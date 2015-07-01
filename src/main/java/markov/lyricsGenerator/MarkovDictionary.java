@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+import markov.util.ArrayTable;
 import markov.util.HashSetTable;
 import markov.util.HashTable;
 import markov.util.Table;
@@ -12,7 +13,7 @@ import markov.util.Table;
 
 public class MarkovDictionary implements Dictionary{
 	private Sequence theSequence = new Sequence();
-	private Table<SequenceList> theSequenceListTable = new HashTable<>(2);
+	private Table<SequenceList> theSequenceListTable = new HashSetTable<>();
 	private final Random randomGenerator = new Random();
 	
 	@Override

@@ -4,23 +4,24 @@ import java.util.*;
 
 public class HashSetTable<Element extends Hashable> implements Table<Element>{
 
-    private final Map<Integer, Element> set = new HashMap<>();
+    private final Map<Integer, Element> map = new HashMap<>();
 
     @Override
     public Element contains(Element theElement) {
-        return set.get(theElement.hashCode());
+        return map.get(theElement.hashCode());
     }
 
     @Override
     public Element insert(Element theElement) {
         Element el = (Element) theElement.copyMe();
-        set.put(el.hashCode(), el);
-        return set.get(el.hashCode());
+        if(!map.containsKey(el.hashCode()))
+            map.put(el.hashCode(), el);
+        return map.get(el.hashCode());
     }
 
     @Override
     public Iterator<Element> iterator() {
-        return set.values().iterator();
+        return map.values().iterator();
     }
 }
 
