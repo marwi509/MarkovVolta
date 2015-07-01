@@ -1,15 +1,12 @@
 package markov.util;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.ListIterator;
+import java.util.*;
 
 
 public class HashTable<Element extends Hashable> implements Table<Element>{
 	
-	private ArrayList<LinkedList<Element>> table;
+	private List<List<Element>> table;
 	private int insertions = 0;
 	private int currentSize = 0;
 	private int maxSize = 1024 * 1024;
@@ -23,7 +20,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 		currentSize = startSize;
 	}
 	
-	private void addToTable(LinkedList<Element> theList, int index)
+	private void addToTable(List<Element> theList, int index)
 	{
 		table.remove(index);
 		table.add(index, theList);
@@ -34,8 +31,8 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 		fixingSize = true;
 		if((insertions > currentSize && currentSize * 2 <= maxSize))
 		{
-			ArrayList<LinkedList<Element> > tempVector = table;
-			table = new ArrayList<LinkedList<Element>>(currentSize * 2);
+			List<List<Element> > tempVector = table;
+			table = new ArrayList<>(currentSize * 2);
 			for(int i = 0; i < currentSize * 2; i ++)
 				table.add(null);
 			currentSize = currentSize * 2;
@@ -74,7 +71,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 		if(table.get(hashValue)==null)
 		{
 			
-			LinkedList<Element> tempVector = new LinkedList<Element>();
+			List<Element> tempVector = new ArrayList<Element>();
 			tempVector.add((Element)theElement.copyMe());
 			//table.add(hashValue, tempVector);
 			addToTable(tempVector, hashValue);

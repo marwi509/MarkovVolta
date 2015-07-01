@@ -8,7 +8,7 @@ package markov.lyricsGenerator;
 
 public class CharacterItem extends LyricsItem{
 
-	private byte character;
+	private final byte character;
 	
 	/**
 	 * CharacterItem(String c)
@@ -21,6 +21,9 @@ public class CharacterItem extends LyricsItem{
 		if(c.length() != 0)
 		{
 			character = (byte)c.charAt(0);
+		} else
+		{
+			throw new IllegalArgumentException("String must be set");
 		}
 	}
 	/**

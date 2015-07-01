@@ -10,7 +10,7 @@ public class HashSetTable<Element extends Hashable> implements Table<Element>{
 
     @Override
     public Element contains(Element theElement) {
-        if(set.contains(theElement)) return (Element)theElement.copyMe();
+        if(set.contains(theElement)) return theElement;
         else return null;
     }
 
@@ -18,7 +18,7 @@ public class HashSetTable<Element extends Hashable> implements Table<Element>{
     public Element insert(Element theElement) {
         Element el = (Element) theElement.copyMe();
         set.add(el);
-        return el;
+        return theElement;
     }
 
     @Override
