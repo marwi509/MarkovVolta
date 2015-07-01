@@ -1,7 +1,9 @@
 package markov.lyricsGenerator;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import markov.util.Comparable;
 import markov.util.Hashable;
@@ -9,8 +11,10 @@ import markov.util.Hashable;
 
 public class Sequence implements Hashable{
 
-	private LinkedList<LyricsItem> items = new LinkedList<LyricsItem>();
+	private List<LyricsItem> items = new ArrayList<>();
 	private static int sequenceLength = 4;
+    private boolean hashSaved = false;
+    private int hashCache = 0;
 	
 	public Sequence copyMe()
 	{
@@ -26,36 +30,36 @@ public class Sequence implements Hashable{
 	{
 		items.add(theItem);
 		if(items.size() > sequenceLength)
-			items.removeFirst();
+			items.remove(0);
 	}
 	
 	public static void setSequenceLength(int theLength)
 	{
 		sequenceLength = theLength;
 	}
-	
+
+	@Override
 	public int hashCode()
 	{
 		if(items.isEmpty())
 			return 0;
 		int result = 0;//items.get(0).hashCode();
-		Iterator<LyricsItem> theIter = items.iterator(); 
-		int counter = 0;
-		while(theIter.hasNext())
+		Iterator<LyricsItem> theIter = items.iterator();
+        while(theIter.hasNext())
 		{
-			result += theIter.next().hashCode()*Math.pow(2,counter+++6);
+			result = result*31 + theIter.next().hashCode();
 		}
 		return result;
 	}
 	
-	public LinkedList<LyricsItem> getList()
+	public List<LyricsItem> getList()
 	{
 		return items;
 	}
 	
 	public boolean equals(Sequence theSequence)
 	{
-		LinkedList<LyricsItem> otherItems = theSequence.getList();
+		List<LyricsItem> otherItems = theSequence.getList();
 		if(items.size()!=otherItems.size())
 			return false;
 		

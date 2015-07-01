@@ -10,14 +10,14 @@ import markov.util.Hashable;
 import markov.util.Table;
 
 public class SequenceList implements Hashable{
-	private Sequence theSequence;
+	private final Sequence theSequence;
 	private Table<Pair> theListIndices;
 	private int insertions = 0;
 	
 	public SequenceList(Sequence theSequenceIn)
 	{
 		theSequence = theSequenceIn.copyMe();
-		theListIndices = new HashTable<Pair>(2);
+		theListIndices = new HashTable<>(2);
 	}
 	
 	public SequenceList(Sequence theSequenceIn, Table<Pair> theTableIn, int insertionsIn)

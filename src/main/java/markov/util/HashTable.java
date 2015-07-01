@@ -17,7 +17,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 	
 	public HashTable(int startSize)
 	{
-		table = new ArrayList<LinkedList<Element>>(startSize);
+		table = new ArrayList<>(startSize);
 		for(int i = 0; i < startSize; i ++)
 			table.add(null);
 		currentSize = startSize;
@@ -69,8 +69,8 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 	{
 		if(!fixingSize)
 			FixSize();
-		
-		int hashValue = theElement.hashCode() % currentSize;
+
+        int hashValue = getIndex(theElement);
 		if(table.get(hashValue)==null)
 		{
 			
@@ -97,11 +97,17 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 			
 		}
 	}
-	
-	
-	public Element contains(final Element theElement)
+
+    private int getIndex(Element theElement) {
+        int hash = theElement.hashCode();
+        if(hash < 0) hash = hash * -1;
+        return hash % currentSize;
+    }
+
+
+    public Element contains(final Element theElement)
 	{
-		int index = theElement.hashCode() % currentSize;
+		int index = getIndex(theElement);
 			
 		if(table.get(index)==null)
 		{

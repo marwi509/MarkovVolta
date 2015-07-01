@@ -13,12 +13,8 @@ public class Pair implements Hashable{
 		item = theItem;
 		amount = theInt;
 	}
-	public void setChar(LyricsItem theItem)
-	{
-		item = theItem;
-	}
-	
-	public void setAmount(int a)
+
+    public void setAmount(int a)
 	{
 		amount = a;
 	}
@@ -41,7 +37,8 @@ public class Pair implements Hashable{
 	@Override
 	public int hashCode()
 	{
-		return item.hashCode();
+		int res = item.hashCode();
+		return res > 0 ? res : res * -1;
 	}
 	
 	@Override

@@ -45,10 +45,11 @@ public class CharacterItem extends LyricsItem{
 		else
 			return false;
 	}
-	
+
+	@Override
 	public int hashCode()
 	{
-		return (int)character + 127;
+		return (int)character ;
 	}
 	
 	public String toString() {

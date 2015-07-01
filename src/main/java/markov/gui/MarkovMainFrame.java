@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.google.common.base.Stopwatch;
 import markov.lyricsGenerator.LyricsFacade;
 import markov.util.io.FileReader;
 import markov.util.io.FileStringWriter;
@@ -104,6 +106,7 @@ public class MarkovMainFrame extends JFrame{
 					theFacade.setWordSequenceLength(slider.getValue());
 					theFacade.setUseWord();
 				}
+				Stopwatch sw = Stopwatch.createStarted();
 				int[] selected = list.getSelectedIndices();
 				for(int i = 0; i < selected.length; i ++)
 				{
@@ -111,7 +114,10 @@ public class MarkovMainFrame extends JFrame{
 				}
 				
 				theFacade.generateSong();
+				long timeElapsed = sw.elapsed(TimeUnit.SECONDS);
+				System.out.println("Time taken = " + timeElapsed +" seconds");
 				theFacade.toFile(outputTextField.getText());
+
 			}
 		});
 		panel_1.add(btnGenerate);

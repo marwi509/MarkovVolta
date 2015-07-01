@@ -8,6 +8,7 @@ import markov.util.ArrayTable;
 import markov.util.HashTable;
 import markov.util.Table;
 
+import markov.util.HashSetTable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +33,14 @@ public class TableTest {
 		theTable = new ArrayTable<LyricsItem>();
 		tableTest();
 	}
-	
+
+    @Test
+    public void setTest()
+    {
+        theTable = new HashSetTable<>();
+        tableTest();
+    }
+
 	public void tableTest()
 	{
 		LyricsItem theItem = new WordItem("abc");

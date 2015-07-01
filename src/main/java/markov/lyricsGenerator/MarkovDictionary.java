@@ -4,12 +4,14 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
+import markov.util.HashSetTable;
 import markov.util.HashTable;
+import markov.util.Table;
 
 
 public class MarkovDictionary implements Dictionary{
 	private Sequence theSequence = new Sequence();
-	private HashTable<SequenceList> theSequenceListTable = new HashTable<SequenceList>(2);
+	private Table<SequenceList> theSequenceListTable = new HashTable<>(2);
 	private Random randomGenerator = new Random();
 	
 	@Override

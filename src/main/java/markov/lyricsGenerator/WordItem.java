@@ -24,7 +24,7 @@ public class WordItem extends LyricsItem{
 			return false;
 	}
 	
-	
+	@Override
 	public int hashCode()
 	{
 		int result = 0;//word.charAt(0);
