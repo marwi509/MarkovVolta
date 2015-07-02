@@ -23,7 +23,8 @@ public class MarkovVoltaTest {
 
         String generatedSong = ReferenceGenerator.generateSong(songName);
 
-        assertEquals(reference, generatedSong);
+        assertEquals("Generated song did not match reference for song " + songName ,
+                reference, generatedSong);
     }
 
     private String getReferenceText(String songName) {
