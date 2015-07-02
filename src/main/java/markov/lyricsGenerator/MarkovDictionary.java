@@ -1,12 +1,11 @@
 package markov.lyricsGenerator;
 
+import markov.util.HashSetTable;
+import markov.util.Table;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import markov.util.HashSetTable;
-import markov.util.HashTable;
-import markov.util.Table;
 
 public class MarkovDictionary
     implements Dictionary {
@@ -34,19 +33,13 @@ public class MarkovDictionary
     @Override
     public LyricsItem getItem() {
         while( true ) {
-            LyricsItem tempPair = getLyricsItem();
-            if (tempPair != null) return tempPair;
+            SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
+            if (theSList == null) {
+                retryWithEmptySequence();
+            } else {
+                return getRandomItemFromSequence(theSList);
+            }
         }
-    }
-
-    private LyricsItem getLyricsItem() {
-        SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
-        if (theSList == null) {
-            retryWithEmptySequence();
-        } else {
-            return getRandomItemFromSequence(theSList);
-        }
-        return null;
     }
 
     private LyricsItem getRandomItemFromSequence(SequenceList theSList) {
@@ -57,15 +50,16 @@ public class MarkovDictionary
 
         while (theIterator.hasNext()) {
             tempPair = theIterator.next();
+
             if (randNumber < tempPair.getAmount() + sum) {
                 theSequence.push(tempPair.getItem());
                 return tempPair.getItem();
             }
+
             sum += tempPair.getAmount();
         }
 
-        theSequence.push(tempPair.getItem());
-        return tempPair.getItem();
+        throw new RuntimeException("Should be unreachable code");
     }
 
     private int randomNumber(SequenceList theSList) {
