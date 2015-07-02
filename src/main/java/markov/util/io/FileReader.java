@@ -1,9 +1,7 @@
 package markov.util.io;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+
 /**
  * Reads a file and puts the content in a String
  * @author Steen
@@ -17,35 +15,44 @@ public class FileReader
 	
 	public void readFile(String fileName)
 	{
-		try
-		{
-			// Open the file that is the first 
-			// command line parameter
-			FileInputStream fstream = new FileInputStream(fileName);
-			// Get the object of DataInputStream
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			
-			String theLine;
-			
-			// Allocate a stringbuilder, this is much faster than appending a string
+		FileInputStream fstream = null;
+		try {
+			fstream = new FileInputStream(fileName);
+		} catch (FileNotFoundException e) {
+			System.err.println("Error: " + e.getMessage());
+		}
+		readFile(fstream);
+	}
+
+	public void readFile(InputStream stream) {
+
+		try (BufferedReader br = getBufferedReader(stream)) {
+
 			StringBuilder theBuffer = new StringBuilder(bufferSize);
+
+            String theLine = br.readLine();
+
+            if(theLine != null) {
+                theBuffer.append(theLine);
+            }
 			while((theLine = br.readLine()) != null)
 			{
-				theBuffer.append(theLine + '\n');
+				theBuffer.append('\n' + theLine);
 			}
-			
+
 			fileContent = theBuffer.toString();
-			
-			//Close the input stream
-			in.close();
 		}
-		catch (Exception e)//Catch exception if any
+		catch (Exception e)
 		{
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
-	public String getContent()
+
+    private BufferedReader getBufferedReader(InputStream stream) {
+        return new BufferedReader(new InputStreamReader(new DataInputStream(stream)));
+    }
+
+    public String getContent()
 	{
 		return fileContent;
 	}

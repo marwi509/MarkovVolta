@@ -12,7 +12,11 @@ public class MarkovDictionary
     implements Dictionary {
     private Sequence theSequence = new Sequence();
     private Table<SequenceList> theSequenceListTable = new HashSetTable<>();
-    private final Random randomGenerator = new Random();
+    private final Random randomGenerator;
+
+    public MarkovDictionary(Random random) {
+        randomGenerator = random;
+    }
 
     @Override
     public void addItemVector(List<LyricsItem> theVector) {

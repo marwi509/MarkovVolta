@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +54,7 @@ public class MarkovMainFrame extends JFrame{
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		theFacade = new LyricsFacade();
+		theFacade = new LyricsFacade(new Random());
 		
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -185,7 +186,7 @@ public class MarkovMainFrame extends JFrame{
 		slider.setValue(4);
 		slider.setSnapToTicks(true);
 		slider.setPaintTicks(true);
-		slider.setMaximum(10);
+		slider.setMaximum(20);
 		panel_4.add(slider);
 		
 		lblNewLabel = new JLabel(""+slider.getValue());

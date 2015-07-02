@@ -3,11 +3,8 @@ package markov.lyricsGenerator;
 import java.util.Iterator;
 import java.util.Vector;
 
+import markov.util.*;
 import markov.util.Comparable;
-import markov.util.Copyable;
-import markov.util.HashTable;
-import markov.util.Hashable;
-import markov.util.Table;
 
 public class SequenceList implements Hashable{
 	private final Sequence theSequence;
@@ -17,7 +14,7 @@ public class SequenceList implements Hashable{
 	public SequenceList(Sequence theSequenceIn)
 	{
 		theSequence = theSequenceIn.copyMe();
-		theListIndices = new HashTable<>(2);
+		theListIndices = new HashSetTable<>();
 	}
 	
 	public SequenceList(Sequence theSequenceIn, Table<Pair> theTableIn, int insertionsIn)

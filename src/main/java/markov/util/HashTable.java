@@ -9,9 +9,14 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 	private List<List<Element>> table;
 	private int insertions = 0;
 	private int currentSize = 0;
-	private int maxSize = 1024 * 1024;
+	private int maxSize = 1024 * 1024 * 1024;
 	private boolean fixingSize = false;
-	
+
+    public HashTable()
+    {
+        this(2);
+    }
+
 	public HashTable(int startSize)
 	{
 		table = new ArrayList<>(startSize);

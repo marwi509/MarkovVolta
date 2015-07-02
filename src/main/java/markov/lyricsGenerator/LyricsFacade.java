@@ -1,6 +1,8 @@
 package markov.lyricsGenerator;
 
+import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import markov.util.io.FileReader;
@@ -20,18 +22,21 @@ public class LyricsFacade {
 	private String song;
 	private int wordSequenceLength = 1;
 	private int characterSequenceLength = 4;
-	
+
+	private final Random random;
+
 	/* Standard constructor */
-	public LyricsFacade()
+	public LyricsFacade(Random random)
 	{
 		setUseCharacter();
+		this.random = random;
 	}
 	
 	/* Set the facade to use characters */
 	public void setUseCharacter()
 	{
 		theParser = new CharParser();
-		theDictionary = new MarkovDictionary();
+		theDictionary = new MarkovDictionary(random);
 		theLyricsCreator = new LyricsCreator();
 		Sequence.setSequenceLength(characterSequenceLength);
 	}
@@ -40,7 +45,7 @@ public class LyricsFacade {
 	public void setUseWord()
 	{
 		theParser = new WordParser();
-		theDictionary = new MarkovDictionary();
+		theDictionary = new MarkovDictionary(random);
 		theLyricsCreator = new SimpleLyricsCreator();
 		Sequence.setSequenceLength(wordSequenceLength);
 	}
@@ -56,6 +61,19 @@ public class LyricsFacade {
 		List<LyricsItem> theItems = theParser.parse(fileContent);
 		System.out.println("File content parsed.");
 		
+		theDictionary.addItemVector(theItems);
+		System.out.println("File content added to dictionary.");
+	}
+
+	public void addSong(InputStream stream) {
+		FileReader theFileReader = new FileReader();
+		theFileReader.readFile(stream);
+		System.out.println("File read.");
+
+		String fileContent = theFileReader.toString();
+		List<LyricsItem> theItems = theParser.parse(fileContent);
+		System.out.println("File content parsed.");
+
 		theDictionary.addItemVector(theItems);
 		System.out.println("File content added to dictionary.");
 	}
