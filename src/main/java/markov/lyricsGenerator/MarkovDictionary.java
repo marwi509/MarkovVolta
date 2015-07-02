@@ -63,6 +63,7 @@ public class MarkovDictionary
             }
             sum += tempPair.getAmount();
         }
+
         theSequence.push(tempPair.getItem());
         return tempPair.getItem();
     }
