@@ -3,7 +3,7 @@ package markov.util;
 import java.util.Iterator;
 import java.util.Vector;
 
-public class ArrayTable<Element extends Copyable & Comparable> implements Table<Element>{
+public class ArrayTable<Element extends Copyable<Element> & Comparable> implements Table<Element>{
 	private Vector<Element> theList;
 	
 	public ArrayTable()
@@ -28,7 +28,7 @@ public class ArrayTable<Element extends Copyable & Comparable> implements Table<
 				return aTheList;
 			}
 		}
-		theList.add((Element)theElement.copyMe());
+		theList.add(theElement.copyMe());
 		return theList.get(theList.size()-1);
 	}
 

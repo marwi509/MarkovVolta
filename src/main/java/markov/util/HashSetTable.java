@@ -2,7 +2,7 @@ package markov.util;
 
 import java.util.*;
 
-public class HashSetTable<Element extends Hashable> implements Table<Element>{
+public class HashSetTable<Element extends Hashable & Copyable<Element>> implements Table<Element>{
 
     private final Map<Integer, Element> map = new HashMap<>();
 
@@ -13,7 +13,7 @@ public class HashSetTable<Element extends Hashable> implements Table<Element>{
 
     @Override
     public Element insert(Element theElement) {
-        Element el = (Element) theElement.copyMe();
+        Element el = theElement.copyMe();
         if(!map.containsKey(el.hashCode()))
             map.put(el.hashCode(), el);
         return map.get(el.hashCode());

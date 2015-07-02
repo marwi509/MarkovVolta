@@ -6,7 +6,7 @@ import java.util.Vector;
 import markov.util.*;
 import markov.util.Comparable;
 
-public class SequenceList implements Hashable{
+public class SequenceList implements Hashable, Copyable<SequenceList> {
 	private final Sequence theSequence;
 	private Table<Pair> theListIndices;
 	private int insertions = 0;
@@ -47,7 +47,7 @@ public class SequenceList implements Hashable{
 	}
 
 	@Override
-	public Copyable copyMe() {
+	public SequenceList copyMe() {
 		SequenceList sequenceOut = new SequenceList(theSequence, theListIndices, insertions);
 		return sequenceOut;
 	}

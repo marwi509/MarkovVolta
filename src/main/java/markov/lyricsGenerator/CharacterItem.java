@@ -1,4 +1,7 @@
 package markov.lyricsGenerator;
+
+import markov.util.Copyable;
+
 /**
  * CharacterItem
  * Implements LyricsItem.
@@ -6,7 +9,7 @@ package markov.lyricsGenerator;
  *
  */
 
-public class CharacterItem extends LyricsItem{
+public class CharacterItem extends LyricsItem {
 
 	private final byte character;
 	

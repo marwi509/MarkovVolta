@@ -1,9 +1,10 @@
 package markov.lyricsGenerator;
 
 import markov.util.Comparable;
+import markov.util.Copyable;
 import markov.util.Hashable;
 
-public class Pair implements Hashable{
+public class Pair implements Hashable, Copyable<Pair>{
 	
 	private final LyricsItem item;
 	private int amount;

@@ -4,7 +4,7 @@ package markov.util;
 import java.util.*;
 
 
-public class HashTable<Element extends Hashable> implements Table<Element>{
+public class HashTable<Element extends Hashable & Copyable<Element>>  implements Table<Element>{
 	
 	private List<List<Element>> table;
 	private int insertions = 0;
@@ -42,24 +42,20 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
 				table.add(null);
 			currentSize = currentSize * 2;
 			insertions = 0;
-			
-			for(int i = 0; i < tempVector.size(); i ++)
-			{
-				if(tempVector.get(i) != null)
-				{
-					for(int j = 0; j < tempVector.get(i).size(); j ++)
-					{
-						Element tempElement = tempVector.get(i).get(j);
-						
-						insert(tempElement);
-					}
-				}
-			}
-			for(int i = 0; i < tempVector.size(); i ++)
-			{
-				if(tempVector.get(i) != null)
-					tempVector.get(i).clear();
-			}
+
+            for (List<Element> aTempVector : tempVector) {
+                if (aTempVector != null) {
+                    for (int j = 0; j < aTempVector.size(); j++) {
+                        Element tempElement = aTempVector.get(j);
+
+                        insert(tempElement);
+                    }
+                }
+            }
+            for (List<Element> aTempVector : tempVector) {
+                if (aTempVector != null)
+                    aTempVector.clear();
+            }
 			tempVector.clear();
 
 		}
@@ -90,7 +86,7 @@ public class HashTable<Element extends Hashable> implements Table<Element>{
                     return temp;
             }
 
-			table.get(hashValue).add((Element)theElement.copyMe());
+			table.get(hashValue).add(theElement.copyMe());
 			insertions++;
 			return table.get(hashValue).get(table.get(hashValue).size()-1);
 			
