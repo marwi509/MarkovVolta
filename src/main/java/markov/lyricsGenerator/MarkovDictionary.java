@@ -30,7 +30,6 @@ public class MarkovDictionary
     public LyricsItem getItem() {
         SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
         if (theSList == null) {
-            //throw new RuntimeException("WHAT?!");
             theSequence = new Sequence();
             return getItem();
         }
