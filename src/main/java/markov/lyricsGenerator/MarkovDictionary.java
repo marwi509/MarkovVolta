@@ -10,7 +10,7 @@ import markov.util.Table;
 public class MarkovDictionary
     implements Dictionary {
     private Sequence theSequence = new Sequence();
-    private Table<SequenceList> theSequenceListTable = new HashTable<>(2);
+    private Table<SequenceList> theSequenceListTable = new HashSetTable<>();
     private final Random randomGenerator = new Random();
 
     @Override
