@@ -32,14 +32,11 @@ public class MarkovDictionary
 
     @Override
     public LyricsItem getItem() {
-        while( true ) {
-            SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
-            if (theSList == null) {
-                retryWithEmptySequence();
-            } else {
-                return getRandomItemFromSequence(theSList);
-            }
+        SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
+        if (theSList == null) {
+            theSList = retryWithEmptySequence();
         }
+        return getRandomItemFromSequence(theSList);
     }
 
     private LyricsItem getRandomItemFromSequence(SequenceList theSList) {
@@ -66,8 +63,9 @@ public class MarkovDictionary
         return randomGenerator.nextInt(theSList.insertions());
     }
 
-    private void retryWithEmptySequence() {
+    private SequenceList retryWithEmptySequence() {
         theSequence = new Sequence();
+        return theSequenceListTable.contains(new SequenceList(theSequence));
     }
 
 }

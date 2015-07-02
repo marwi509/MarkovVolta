@@ -1,7 +1,5 @@
 package markov.lyricsGenerator;
 
-import markov.util.Copyable;
-
 /**
  * CharacterItem
  * Implements LyricsItem.
@@ -36,8 +34,7 @@ public class CharacterItem extends LyricsItem {
 	 */
 	public CharacterItem copyMe()
 	{
-		CharacterItem tempItem = new CharacterItem(new String("" + (char)character));
-		return tempItem;
+		return new CharacterItem("" + (char) character);
 	}
 	
 	/**
@@ -46,10 +43,7 @@ public class CharacterItem extends LyricsItem {
 	 * @return true/false
 	 */
 	public boolean equals(LyricsItem item) {
-		if(this.toString().equals(item.toString()))
-			return true;
-		else
-			return false;
+		return this.toString().equals(item.toString());
 	}
 
 	@Override
@@ -59,7 +53,7 @@ public class CharacterItem extends LyricsItem {
 	}
 	
 	public String toString() {
-		return new String("" + (char)character);
+		return "" + (char) character;
 	}
 
 }

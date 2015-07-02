@@ -1,12 +1,11 @@
 package markov.lyricsGenerator;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 import markov.util.Comparable;
 import markov.util.Hashable;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class Sequence implements Hashable{
@@ -17,11 +16,9 @@ public class Sequence implements Hashable{
     public Sequence copyMe()
 	{
 		Sequence tempSequence = new Sequence();
-		Iterator<LyricsItem> theIter = items.iterator();
-		while(theIter.hasNext())
-		{
-			tempSequence.push(theIter.next());
-		}
+        for (LyricsItem item : items) {
+            tempSequence.push(item);
+        }
 		return tempSequence;
 	}
 	public void push(LyricsItem theItem)
@@ -42,11 +39,9 @@ public class Sequence implements Hashable{
 		if(items.isEmpty())
 			return 0;
 		int result = 0;//items.get(0).hashCode();
-		Iterator<LyricsItem> theIter = items.iterator();
-        while(theIter.hasNext())
-		{
-			result = result*31 + theIter.next().hashCode();
-		}
+        for (LyricsItem item : items) {
+            result = result * 31 + item.hashCode();
+        }
 		return result;
 	}
 	
@@ -73,11 +68,9 @@ public class Sequence implements Hashable{
 	public String toString()
 	{
 		String returnString="";
-		Iterator<LyricsItem> theIter = items.iterator();
-		while(theIter.hasNext())
-		{
-			returnString += theIter.next();
-		}
+        for (LyricsItem item : items) {
+            returnString += item;
+        }
 		return returnString;
 	}
 	

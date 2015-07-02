@@ -1,10 +1,9 @@
 package markov.lyricsGenerator;
 
-import java.util.Iterator;
-import java.util.Vector;
-
-import markov.util.*;
 import markov.util.Comparable;
+import markov.util.*;
+
+import java.util.Iterator;
 
 public class SequenceList implements Hashable, Copyable<SequenceList> {
 	private final Sequence theSequence;
@@ -48,8 +47,7 @@ public class SequenceList implements Hashable, Copyable<SequenceList> {
 
 	@Override
 	public SequenceList copyMe() {
-		SequenceList sequenceOut = new SequenceList(theSequence, theListIndices, insertions);
-		return sequenceOut;
+		return new SequenceList(theSequence, theListIndices, insertions);
 	}
 
 	@Override

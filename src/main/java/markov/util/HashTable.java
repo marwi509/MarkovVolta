@@ -1,7 +1,9 @@
 package markov.util;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class HashTable<Element extends Hashable & Copyable<Element>>  implements Table<Element>{
@@ -45,9 +47,7 @@ public class HashTable<Element extends Hashable & Copyable<Element>>  implements
 
             for (List<Element> aTempVector : tempVector) {
                 if (aTempVector != null) {
-                    for (int j = 0; j < aTempVector.size(); j++) {
-                        Element tempElement = aTempVector.get(j);
-
+                    for (Element tempElement : aTempVector) {
                         insert(tempElement);
                     }
                 }
@@ -73,7 +73,7 @@ public class HashTable<Element extends Hashable & Copyable<Element>>  implements
 		{
 			
 			List<Element> tempVector = new ArrayList<>();
-			tempVector.add((Element)theElement.copyMe());
+			tempVector.add(theElement.copyMe());
 			//table.add(hashValue, tempVector);
 			addToTable(tempVector, hashValue);
 			insertions++;

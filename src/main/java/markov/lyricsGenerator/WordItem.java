@@ -14,20 +14,16 @@ public class WordItem extends LyricsItem{
 	
 	public WordItem copyMe()
 	{
-		WordItem tempItem = new WordItem(new String(word));
-		return tempItem;
+		return new WordItem(new String(word));
 	}
 	public boolean equals(LyricsItem item) {
-		if(this.toString().equals(item.toString()))
-			return true;
-		else
-			return false;
+		return this.toString().equals(item.toString());
 	}
 	
 	@Override
 	public int hashCode()
 	{
-		int result = 0;//word.charAt(0);
+		int result = 0;
 		for(int i = 0; i < word.length; i++)
 		{
 			result += word[i] * Math.pow(2,i+3);

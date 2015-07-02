@@ -16,10 +16,7 @@ public class LyricsCreator {
 	{
 		songLength=theLength;
 	}
-	public void printSong(String filename)
-	{
-		
-	}
+
 	public String toString()
 	{
 		return song;

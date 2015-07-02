@@ -5,12 +5,7 @@ public class SimpleLyricsCreator extends LyricsCreator{
 	
 	private int charsPerRow = 40;
 	private int rowsPerParagraph = 4;
-	
-	@Override
-	public void printSong(String filename) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	public void setRowLength(int length)
 	{
 		charsPerRow = length;
