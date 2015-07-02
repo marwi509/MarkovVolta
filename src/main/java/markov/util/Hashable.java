@@ -1,5 +1,5 @@
 package markov.util;
 
-public interface Hashable extends Comparable{
+public interface Hashable<T> extends Comparable {
 	//public abstract int hashCode();
 }

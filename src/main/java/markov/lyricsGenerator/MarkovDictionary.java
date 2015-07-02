@@ -33,15 +33,28 @@ public class MarkovDictionary
 
     @Override
     public LyricsItem getItem() {
+        while( true ) {
+            LyricsItem tempPair = getLyricsItem();
+            if (tempPair != null) return tempPair;
+        }
+    }
+
+    private LyricsItem getLyricsItem() {
         SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
         if (theSList == null) {
-            theSequence = new Sequence();
-            return getItem();
+            retryWithEmptySequence();
+        } else {
+            return getRandomItemFromSequence(theSList);
         }
-        int randNumber = randomGenerator.nextInt(theSList.insertions());
+        return null;
+    }
+
+    private LyricsItem getRandomItemFromSequence(SequenceList theSList) {
+        int randNumber = randomNumber(theSList);
         int sum = 0;
         Iterator<Pair> theIterator = theSList.iterator();
         Pair tempPair = null;
+
         while (theIterator.hasNext()) {
             tempPair = theIterator.next();
             if (randNumber < tempPair.getAmount() + sum) {
@@ -52,6 +65,14 @@ public class MarkovDictionary
         }
         theSequence.push(tempPair.getItem());
         return tempPair.getItem();
+    }
+
+    private int randomNumber(SequenceList theSList) {
+        return randomGenerator.nextInt(theSList.insertions());
+    }
+
+    private void retryWithEmptySequence() {
+        theSequence = new Sequence();
     }
 
 }
