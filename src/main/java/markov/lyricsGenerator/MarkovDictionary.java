@@ -46,7 +46,7 @@ public class MarkovDictionary
         int randNumber = randomNumber(theSList);
         int sum = 0;
         Iterator<Pair> theIterator = theSList.iterator();
-        Pair tempPair = null;
+        Pair tempPair;
 
         while (theIterator.hasNext()) {
             tempPair = theIterator.next();
