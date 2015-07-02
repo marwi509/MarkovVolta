@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import markov.util.HashSetTable;
 import markov.util.HashTable;
 import markov.util.Table;
 
