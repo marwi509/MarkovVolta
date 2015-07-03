@@ -16,8 +16,12 @@ public class WordItem extends LyricsItem{
 	{
 		return new WordItem(new String(word));
 	}
-	public boolean equals(LyricsItem item) {
-		return this.toString().equals(item.toString());
+
+	@Override
+	public boolean equals(Object item) {
+
+		return (item instanceof WordItem) &&
+				this.toString().equals(item.toString());
 	}
 	
 	@Override

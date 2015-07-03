@@ -1,18 +1,15 @@
 package markov.lyricsGenerator;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import markov.util.ArrayTable;
+import markov.util.HashSetTable;
 import markov.util.HashTable;
 import markov.util.Table;
-
-import markov.util.HashSetTable;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
+
+import static org.junit.Assert.assertTrue;
 
 public class TableTest {
 	Table<LyricsItem> theTable;
@@ -43,19 +40,10 @@ public class TableTest {
         tableTest();
     }
 
-    @Test
-    public void what() {
-        Set<Character> set = new HashSet<>();
-        set.add('a');
-
-        assertTrue(set.contains('a'));
-    }
-
-
 	public void tableTest()
 	{
 		LyricsItem theItem = new WordItem("abc");
-		assertTrue(theTable.insert(theItem) != theItem);
+		theTable.insert(theItem);
 		assertTrue(theTable.insert(theItem) == theTable.contains(theItem));
 		assertTrue(theTable.insert(theItem).equals(theItem));
 		assertTrue(theTable.contains(theItem).equals(theItem));

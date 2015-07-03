@@ -1,6 +1,7 @@
 package integration;
 
 import markov.lyricsGenerator.LyricsFacade;
+import markov.util.HashSetTable;
 import markov.util.io.FileReader;
 
 import java.io.InputStream;
@@ -28,7 +29,7 @@ public class TestUtils {
     }
 
     public static String generateSong(String... songNames) {
-        final LyricsFacade facade = new LyricsFacade(new Random(seed));
+        final LyricsFacade facade = new LyricsFacade(new Random(seed), new HashSetTable<>());
 
         facade.setCharacterSequenceLength(4);
         facade.setUseCharacter();

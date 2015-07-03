@@ -1,22 +1,27 @@
 package markov.util;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class HashSetTable<Element extends Hashable & Copyable<Element>> implements Table<Element>{
 
-    private final Map<Integer, Element> map = new HashMap<>();
+    private final Map<Element, Element> map;
+
+    public HashSetTable() {
+        map = new HashMap<>();
+    }
 
     @Override
     public Element contains(Element theElement) {
-        return map.get(theElement.hashCode());
+        return map.get(theElement);
     }
 
     @Override
     public Element insert(Element theElement) {
-        Element el = theElement.copyMe();
-        if(!map.containsKey(el.hashCode()))
-            map.put(el.hashCode(), el);
-        return map.get(el.hashCode());
+        if(!map.containsKey(theElement))
+            map.put(theElement, theElement);
+        return map.get(theElement);
     }
 
     @Override

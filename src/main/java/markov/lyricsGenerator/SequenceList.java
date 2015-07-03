@@ -1,7 +1,9 @@
 package markov.lyricsGenerator;
 
-import markov.util.Comparable;
-import markov.util.*;
+import markov.util.Copyable;
+import markov.util.HashSetTable;
+import markov.util.Hashable;
+import markov.util.Table;
 
 import java.util.Iterator;
 
@@ -51,7 +53,7 @@ public class SequenceList implements Hashable, Copyable<SequenceList> {
 	}
 
 	@Override
-	public boolean equals(Comparable C) {
+	public boolean equals(Object C) {
 		if(this.getClass() != C.getClass())
 			return false;
 		SequenceList S = (SequenceList) C;

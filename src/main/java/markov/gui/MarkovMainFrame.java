@@ -1,8 +1,15 @@
 package markov.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import com.google.common.base.Stopwatch;
+import markov.lyricsGenerator.LyricsFacade;
+import markov.util.HashSetTable;
+import markov.util.io.FileReader;
+import markov.util.io.FileStringWriter;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -10,24 +17,6 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import com.google.common.base.Stopwatch;
-import markov.lyricsGenerator.LyricsFacade;
-import markov.util.io.FileReader;
-import markov.util.io.FileStringWriter;
 
 public class MarkovMainFrame extends JFrame{
 	LyricsFacade theFacade;
@@ -54,7 +43,7 @@ public class MarkovMainFrame extends JFrame{
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		theFacade = new LyricsFacade(new Random());
+		theFacade = new LyricsFacade(new Random(), new HashSetTable<>());
 		
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		

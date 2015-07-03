@@ -42,8 +42,10 @@ public class CharacterItem extends LyricsItem {
 	 * Checks if a CharacterItem is equal to another CharacterItem
 	 * @return true/false
 	 */
-	public boolean equals(LyricsItem item) {
-		return this.toString().equals(item.toString());
+	public boolean equals(Object item) {
+
+		return (item instanceof CharacterItem) &&
+				this.toString().equals(item.toString());
 	}
 
 	@Override

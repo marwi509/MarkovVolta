@@ -1,6 +1,5 @@
 package markov.lyricsGenerator;
 
-import markov.util.Comparable;
 import markov.util.Copyable;
 import markov.util.Hashable;
 
@@ -48,7 +47,7 @@ public class Pair implements Hashable, Copyable<Pair>{
 	}
 	
 	@Override
-	public boolean equals(Comparable C) 
+	public boolean equals(Object C)
 	{
 		if(C.getClass() != this.getClass())
 			return false;

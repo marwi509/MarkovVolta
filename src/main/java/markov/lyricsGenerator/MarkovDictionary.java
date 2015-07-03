@@ -1,6 +1,5 @@
 package markov.lyricsGenerator;
 
-import markov.util.HashSetTable;
 import markov.util.Table;
 
 import java.util.Iterator;
@@ -10,22 +9,24 @@ import java.util.Random;
 public class MarkovDictionary
     implements Dictionary {
     private Sequence theSequence = new Sequence();
-    private Table<SequenceList> theSequenceListTable = new HashSetTable<>();
+    private final Table<SequenceList> theSequenceListTable;
     private final Random randomGenerator;
 
-    public MarkovDictionary(Random random) {
+    public MarkovDictionary(Random random, Table table) {
+
         randomGenerator = random;
+        this.theSequenceListTable = table;
     }
 
     @Override
-    public void addItemVector(List<LyricsItem> theVector) {
+    public void addItemVector(List<LyricsItem> lyricsItems) {
         theSequence = new Sequence();
-        for (int i = 0; i < theVector.size(); i++) {
+        for (int i = 0; i < lyricsItems.size(); i++) {
             if (i % 100000 == 0)
-                System.out.println("Item " + i + " of " + theVector.size());
+                System.out.println("Item " + i + " of " + lyricsItems.size());
             SequenceList theSList = theSequenceListTable.insert(new SequenceList(theSequence));
-            theSList.addItem(theVector.get(i));
-            theSequence.push(theVector.get(i));
+            theSList.addItem(lyricsItems.get(i));
+            theSequence.push(lyricsItems.get(i));
         }
         theSequence = new Sequence();
     }

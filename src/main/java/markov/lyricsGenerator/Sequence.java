@@ -1,6 +1,5 @@
 package markov.lyricsGenerator;
 
-import markov.util.Comparable;
 import markov.util.Hashable;
 
 import java.util.ArrayList;
@@ -37,8 +36,8 @@ public class Sequence implements Hashable{
 	public int hashCode()
 	{
 		if(items.isEmpty())
-			return 0;
-		int result = 0;//items.get(0).hashCode();
+			return 42;
+		int result = 0;
         for (LyricsItem item : items) {
             result = result * 31 + item.hashCode();
         }
@@ -75,7 +74,7 @@ public class Sequence implements Hashable{
 	}
 	
 	@Override
-	public boolean equals(Comparable C) 
+	public boolean equals(Object C)
 	{
 		if(C.getClass() != this.getClass())
 			return false;
