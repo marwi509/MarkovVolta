@@ -19,7 +19,7 @@ import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class MarkovMainFrame extends JFrame{
-	LyricsFacade theFacade;
+
 	Vector<String> theFiles = new Vector<String>();
 	JList list;
 	JRadioButton rdbtnCharacter;
@@ -43,7 +43,6 @@ public class MarkovMainFrame extends JFrame{
 		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		theFacade = new LyricsFacade(new Random(), new HashSetTable<>());
 		
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -86,6 +85,7 @@ public class MarkovMainFrame extends JFrame{
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				LyricsFacade theFacade = new LyricsFacade(new Random(), new HashSetTable<>());
 				if(rdbtnCharacter.isSelected())
 				{
 					theFacade.setCharacterSequenceLength(slider.getValue());

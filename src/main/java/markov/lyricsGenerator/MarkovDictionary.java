@@ -11,7 +11,7 @@ public class MarkovDictionary
     private final Table<SequenceList> theSequenceListTable;
     private final Random randomGenerator;
 
-    public MarkovDictionary(Random random, Table table) {
+    public MarkovDictionary(Random random, Table<SequenceList> table) {
 
         randomGenerator = random;
         this.theSequenceListTable = table;
