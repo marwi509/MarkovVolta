@@ -7,20 +7,19 @@ import markov.util.io.FileReader;
 import markov.util.io.FileStringWriter;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class MarkovMainFrame extends JFrame{
 
-	Vector<String> theFiles = new Vector<String>();
+	Vector<String> theFiles = new Vector<>();
 	JList list;
 	JRadioButton rdbtnCharacter;
 	JRadioButton rdbtnWord;
@@ -30,17 +29,14 @@ public class MarkovMainFrame extends JFrame{
 	String theFilesString = "";
 	
 	public MarkovMainFrame() {
-		if(System.getProperty("os.name").equalsIgnoreCase(new String("Linux")))
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux"))
 			standardDirectory = System.getenv("HOME") + "/Dokument/Mars Volta/";
 		
 		FileReader theFileReader = new FileReader();
 		theFileReader.readFile(standardDirectory + "files.collection");
 		String theSavedFiles = theFileReader.getContent();
 		String[] Lines = theSavedFiles.split("\n");
-		for(int i = 0; i < Lines.length; i ++)
-		{
-			theFiles.add(Lines[i]);
-		}
+        Collections.addAll(theFiles, Lines);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -55,20 +51,15 @@ public class MarkovMainFrame extends JFrame{
 		sourceTextField.setColumns(10);
 		
 		JButton btnAdd = new JButton("Add");
-		btnAdd.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				theFiles.add(sourceTextField.getText());
-				theFilesString = "";
-				for(int i = 0; i < theFiles.size(); i ++)
-				{
-					theFilesString += theFiles.get(i) + "\n";
-				}
-				FileStringWriter.toFile(theFilesString, standardDirectory + "files.collection");
-				list.setListData(theFiles);
-			}
-		});
+		btnAdd.addActionListener(arg0 -> {
+            theFiles.add(sourceTextField.getText());
+            theFilesString = "";
+            for (String theFile : theFiles) {
+                theFilesString += theFile + "\n";
+            }
+            FileStringWriter.toFile(theFilesString, standardDirectory + "files.collection");
+            list.setListData(theFiles);
+        });
 		
 		panel.add(btnAdd);
 		
@@ -121,15 +112,13 @@ public class MarkovMainFrame extends JFrame{
 				if(e.getKeyCode() == KeyEvent.VK_DELETE)
 				{
 					int[] index = list.getSelectedIndices();
-					for(int i = 0; i < index.length; i ++)
-					{
-						theFiles.remove(index[i]);
-					}
+                    for (int anIndex : index) {
+                        theFiles.remove(anIndex);
+                    }
 					theFilesString = "";
-					for(int i = 0; i < theFiles.size(); i ++)
-					{
-						theFilesString += theFiles.get(i) + "\n";
-					}
+                    for (String theFile : theFiles) {
+                        theFilesString += theFile + "\n";
+                    }
 					FileStringWriter.toFile(theFilesString, standardDirectory + "files.collection");
 					list.setListData(theFiles);
 				}
@@ -165,13 +154,7 @@ public class MarkovMainFrame extends JFrame{
 		panel_2.add(panel_4, BorderLayout.SOUTH);
 		
 		slider = new JSlider();
-		slider.addChangeListener(new ChangeListener() 
-		{
-			public void stateChanged(ChangeEvent arg0) 
-			{
-				lblNewLabel.setText(""+slider.getValue());
-			}
-		});
+		slider.addChangeListener(arg0 -> lblNewLabel.setText(""+slider.getValue()));
 		slider.setValue(4);
 		slider.setSnapToTicks(true);
 		slider.setPaintTicks(true);
