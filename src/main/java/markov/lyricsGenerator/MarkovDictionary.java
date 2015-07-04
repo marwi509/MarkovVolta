@@ -2,7 +2,6 @@ package markov.lyricsGenerator;
 
 import markov.util.Table;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -43,18 +42,15 @@ public class MarkovDictionary
     private LyricsItem getRandomItemFromSequence(SequenceList theSList) {
         int randNumber = randomNumber(theSList);
         int sum = 0;
-        Iterator<Pair> theIterator = theSList.iterator();
-        Pair tempPair;
 
-        while (theIterator.hasNext()) {
-            tempPair = theIterator.next();
+        for(Pair pair : theSList) {
 
-            if (randNumber < tempPair.getAmount() + sum) {
-                theSequence.push(tempPair.getItem());
-                return tempPair.getItem();
+            if (randNumber < pair.getAmount() + sum) {
+                theSequence.push(pair.getItem());
+                return pair.getItem();
             }
 
-            sum += tempPair.getAmount();
+            sum += pair.getAmount();
         }
 
         throw new RuntimeException("Should be unreachable code");

@@ -7,7 +7,7 @@ import markov.util.Table;
 
 import java.util.Iterator;
 
-public class SequenceList implements Hashable, Copyable<SequenceList> {
+public class SequenceList implements Hashable, Copyable<SequenceList>, Iterable<Pair> {
 	private final Sequence theSequence;
 	private Table<Pair> theListIndices;
 	private int insertions = 0;
