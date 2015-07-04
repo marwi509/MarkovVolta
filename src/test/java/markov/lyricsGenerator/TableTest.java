@@ -48,7 +48,7 @@ public class TableTest {
 		assertTrue(theTable.insert(theItem).equals(theItem));
 		assertTrue(theTable.contains(theItem).equals(theItem));
 		
-		LyricsItem theOtherItem = new CharacterItem("a");
+		LyricsItem theOtherItem = new CharacterItem('a');
 		assertTrue(theTable.insert(theOtherItem) != theTable.contains(theItem));
 		assertTrue(theTable.contains(theOtherItem) != theTable.contains(theItem));
 		

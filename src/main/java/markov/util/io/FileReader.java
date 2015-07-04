@@ -11,7 +11,7 @@ public class FileReader
 {
 	
 	private String fileContent="";
-	private int bufferSize = 10;
+	private final static int bufferSize = 10;
 	
 	public void readFile(String fileName)
 	{

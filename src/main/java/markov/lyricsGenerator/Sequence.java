@@ -12,6 +12,12 @@ public class Sequence implements Hashable{
 	private List<LyricsItem> items = new ArrayList<>();
 	private static int sequenceLength = 4;
 
+    private Sequence(){}
+
+    public static Sequence empty() {
+        return new Sequence();
+    }
+
     public Sequence copyMe()
 	{
 		Sequence tempSequence = new Sequence();

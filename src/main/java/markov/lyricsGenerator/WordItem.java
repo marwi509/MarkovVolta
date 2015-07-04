@@ -1,6 +1,6 @@
 package markov.lyricsGenerator;
 
-public class WordItem extends LyricsItem{
+public class WordItem implements LyricsItem{
 
 	private char[] word;
 	public WordItem(String c)
@@ -10,11 +10,6 @@ public class WordItem extends LyricsItem{
 			word = new char[c.length()];
 			word = c.toCharArray();
 		}
-	}
-	
-	public WordItem copyMe()
-	{
-		return new WordItem(new String(word));
 	}
 
 	@Override
@@ -28,10 +23,9 @@ public class WordItem extends LyricsItem{
 	public int hashCode()
 	{
 		int result = 0;
-		for(int i = 0; i < word.length; i++)
-		{
-			result += word[i] * Math.pow(2,i+3);
-		}
+        for (char aWord : word) {
+            result = result * 31 + aWord;
+        }
 		return result;
 	}
 	

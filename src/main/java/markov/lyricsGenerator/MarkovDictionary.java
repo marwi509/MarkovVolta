@@ -7,19 +7,20 @@ import java.util.Random;
 
 public class MarkovDictionary
     implements Dictionary {
-    private Sequence theSequence = new Sequence();
     private final Table<SequenceList> theSequenceListTable;
     private final Random randomGenerator;
+    private Sequence currentSequence;
 
     public MarkovDictionary(Random random, Table<SequenceList> table) {
 
         randomGenerator = random;
         this.theSequenceListTable = table;
+        currentSequence = Sequence.empty();
     }
 
     @Override
     public void addItemVector(List<LyricsItem> lyricsItems) {
-        theSequence = new Sequence();
+        Sequence theSequence = Sequence.empty();
         for (int i = 0; i < lyricsItems.size(); i++) {
             if (i % 100000 == 0)
                 System.out.println("Item " + i + " of " + lyricsItems.size());
@@ -27,12 +28,11 @@ public class MarkovDictionary
             theSList.addItem(lyricsItems.get(i));
             theSequence.push(lyricsItems.get(i));
         }
-        theSequence = new Sequence();
     }
 
     @Override
     public LyricsItem getItem() {
-        SequenceList theSList = theSequenceListTable.contains(new SequenceList(theSequence));
+        SequenceList theSList = theSequenceListTable.contains(new SequenceList(currentSequence));
         if (theSList == null) {
             theSList = retryWithEmptySequence();
         }
@@ -46,7 +46,7 @@ public class MarkovDictionary
         for(Pair pair : theSList) {
 
             if (randNumber < pair.getAmount() + sum) {
-                theSequence.push(pair.getItem());
+                currentSequence.push(pair.getItem());
                 return pair.getItem();
             }
 
@@ -61,8 +61,8 @@ public class MarkovDictionary
     }
 
     private SequenceList retryWithEmptySequence() {
-        theSequence = new Sequence();
-        return theSequenceListTable.contains(new SequenceList(theSequence));
+        currentSequence = Sequence.empty();
+        return theSequenceListTable.contains(new SequenceList(currentSequence));
     }
 
 }

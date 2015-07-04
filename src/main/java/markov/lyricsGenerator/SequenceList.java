@@ -1,15 +1,14 @@
 package markov.lyricsGenerator;
 
-import markov.util.Copyable;
 import markov.util.HashSetTable;
 import markov.util.Hashable;
 import markov.util.Table;
 
 import java.util.Iterator;
 
-public class SequenceList implements Hashable, Copyable<SequenceList>, Iterable<Pair> {
+public class SequenceList implements Hashable, Iterable<Pair> {
 	private final Sequence theSequence;
-	private Table<Pair> theListIndices;
+	private final Table<Pair> theListIndices;
 	private int insertions = 0;
 	
 	public SequenceList(Sequence theSequenceIn)
@@ -17,15 +16,8 @@ public class SequenceList implements Hashable, Copyable<SequenceList>, Iterable<
 		theSequence = theSequenceIn.copyMe();
 		theListIndices = new HashSetTable<>();
 	}
-	
-	public SequenceList(Sequence theSequenceIn, Table<Pair> theTableIn, int insertionsIn)
-	{
-		theSequence = theSequenceIn.copyMe();
-		theListIndices = theTableIn;
-		insertions = insertionsIn;
-	}
-	
-	public void addItem(LyricsItem theItem)
+
+    public void addItem(LyricsItem theItem)
 	{
 		insertions++;
 		Pair tempPair = theListIndices.insert(new Pair(theItem, 0));
@@ -42,15 +34,9 @@ public class SequenceList implements Hashable, Copyable<SequenceList>, Iterable<
 		return insertions;
 	}
 	
-	public Sequence getSequence()
-	{
-		return theSequence;
-	}
-
-	@Override
-	public SequenceList copyMe() {
-		return new SequenceList(theSequence, theListIndices, insertions);
-	}
+	public Sequence getSequence() {
+        return theSequence;
+    }
 
 	@Override
 	public boolean equals(Object C) {

@@ -6,18 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class HashTable<Element extends Hashable & Copyable<Element>>  implements Table<Element>{
+public class HashTable<Element extends Hashable>  implements Table<Element>{
 	
 	private List<List<Element>> table;
 	private int insertions = 0;
 	private int currentSize = 0;
-	private int maxSize = 1024 * 1024 * 1024;
+	private static final int maxSize = 1024 * 1024 * 1024;
 	private boolean fixingSize = false;
-
-    public HashTable()
-    {
-        this(2);
-    }
 
 	public HashTable(int startSize)
 	{
@@ -73,7 +68,7 @@ public class HashTable<Element extends Hashable & Copyable<Element>>  implements
 		{
 			
 			List<Element> tempVector = new ArrayList<>();
-			tempVector.add(theElement.copyMe());
+			tempVector.add(theElement);
 			//table.add(hashValue, tempVector);
 			addToTable(tempVector, hashValue);
 			insertions++;
@@ -86,7 +81,7 @@ public class HashTable<Element extends Hashable & Copyable<Element>>  implements
                     return temp;
             }
 
-			table.get(hashValue).add(theElement.copyMe());
+			table.get(hashValue).add(theElement);
 			insertions++;
 			return table.get(hashValue).get(table.get(hashValue).size()-1);
 			

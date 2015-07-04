@@ -1,9 +1,8 @@
 package markov.lyricsGenerator;
 
-import markov.util.Copyable;
 import markov.util.Hashable;
 
-public class Pair implements Hashable, Copyable<Pair>{
+public class Pair implements Hashable{
 	
 	private final LyricsItem item;
 	private int amount;
@@ -18,12 +17,7 @@ public class Pair implements Hashable, Copyable<Pair>{
 	{
 		amount = a;
 	}
-	
-	public void addAmount(int a)
-	{
-		amount+=a;
-	}
-	
+
 	public LyricsItem getItem()
 	{
 		return item;
@@ -38,12 +32,6 @@ public class Pair implements Hashable, Copyable<Pair>{
 	public int hashCode()
 	{
 		return item.hashCode();
-	}
-	
-	@Override
-	public Pair copyMe()
-	{
-		return new Pair(item.copyMe(), amount);
 	}
 	
 	@Override

@@ -29,7 +29,8 @@ public class TestUtils {
     }
 
     public static String generateSong(String... songNames) {
-        final LyricsFacade facade = new LyricsFacade(new Random(seed), new HashSetTable<>());
+        final LyricsFacade facade = new LyricsFacade(new Random(seed),
+                new HashSetTable<>());
 
         facade.setCharacterSequenceLength(4);
         facade.setUseCharacter();

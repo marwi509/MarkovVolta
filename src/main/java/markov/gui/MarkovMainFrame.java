@@ -8,8 +8,6 @@ import markov.util.io.FileStringWriter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Collections;
@@ -20,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class MarkovMainFrame extends JFrame{
 
 	Vector<String> theFiles = new Vector<>();
-	JList list;
+	JList<String> list;
 	JRadioButton rdbtnCharacter;
 	JRadioButton rdbtnWord;
 	JLabel lblNewLabel = new JLabel();
@@ -72,38 +70,33 @@ public class MarkovMainFrame extends JFrame{
 		outputTextField.setColumns(10);
 		
 		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				LyricsFacade theFacade = new LyricsFacade(new Random(), new HashSetTable<>());
-				if(rdbtnCharacter.isSelected())
-				{
-					theFacade.setCharacterSequenceLength(slider.getValue());
-					theFacade.setUseCharacter();
-				}
-				else
-				{
-					theFacade.setWordSequenceLength(slider.getValue());
-					theFacade.setUseWord();
-				}
-				Stopwatch sw = Stopwatch.createStarted();
-				int[] selected = list.getSelectedIndices();
-				for(int i = 0; i < selected.length; i ++)
-				{
-					theFacade.addSong(theFiles.get(selected[i]));
-				}
-				
-				theFacade.generateSong();
-				long timeElapsed = sw.elapsed(TimeUnit.SECONDS);
-				System.out.println("Time taken = " + timeElapsed +" seconds");
-				theFacade.toFile(outputTextField.getText());
+		btnGenerate.addActionListener(e -> {
+            LyricsFacade theFacade = new LyricsFacade(new Random(), new HashSetTable<>());
+            if(rdbtnCharacter.isSelected())
+            {
+                theFacade.setCharacterSequenceLength(slider.getValue());
+                theFacade.setUseCharacter();
+            }
+            else
+            {
+                theFacade.setWordSequenceLength(slider.getValue());
+                theFacade.setUseWord();
+            }
+            Stopwatch sw = Stopwatch.createStarted();
+            int[] selected = list.getSelectedIndices();
+            for (int aSelected : selected) {
+                theFacade.addSong(theFiles.get(aSelected));
+            }
 
-			}
-		});
+            theFacade.generateSong();
+            long timeElapsed = sw.elapsed(TimeUnit.MILLISECONDS);
+            System.out.println("Time taken = " + (double)timeElapsed / 1000.0 +" seconds");
+            theFacade.toFile(outputTextField.getText());
+
+        });
 		panel_1.add(btnGenerate);
 		
-		list = new JList();
+		list = new JList<>();
 		list.setListData(theFiles);
 		list.addKeyListener(new KeyAdapter() {
 			@Override

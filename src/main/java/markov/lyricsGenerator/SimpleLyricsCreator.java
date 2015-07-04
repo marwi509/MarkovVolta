@@ -17,14 +17,12 @@ public class SimpleLyricsCreator extends LyricsCreator{
 	}
 	@Override
 	public void createSong(int length) {
-		int charsInRow = 0;
-		int numRows = 0;
 		while(song.length() < songLength)
 		{
-			numRows = 0;
+			int numRows = 0;
 			while(numRows < rowsPerParagraph)
 			{
-				charsInRow = 0;
+				int charsInRow = 0;
 				while(charsInRow < charsPerRow)
 				{
 					String obtainedString = theDictionary.getItem().toString();

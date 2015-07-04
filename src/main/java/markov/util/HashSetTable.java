@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class HashSetTable<Element extends Hashable & Copyable<Element>> implements Table<Element>{
+public class HashSetTable<Element extends Hashable> implements Table<Element>{
 
     private final Map<Element, Element> map;
 

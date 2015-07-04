@@ -18,16 +18,16 @@ public class LyricsFacade {
 	private Parser theParser;
 	private Dictionary theDictionary;
 	private LyricsCreator theLyricsCreator;
-	private int songLength = 40000;
+	private final static int songLength = 40000;
 	private String song;
 	private int wordSequenceLength = 1;
 	private int characterSequenceLength = 4;
-	private final Table table;
+	private final Table<SequenceList> table;
 
 	private final Random random;
 
 	/* Standard constructor */
-	public LyricsFacade(Random random, Table table)
+	public LyricsFacade(Random random, Table<SequenceList> table)
 	{
 		setUseCharacter();
 		this.random = random;

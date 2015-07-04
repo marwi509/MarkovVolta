@@ -1,9 +1,10 @@
 package markov.lyricsGenerator;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class LyricsItemTest {
 	WordItem theWordItem;
@@ -21,9 +22,9 @@ public class LyricsItemTest {
 	@Test
 	public void testCharacterItem()
 	{
-		theChItem = new CharacterItem("a");
-		theSameChItem = new CharacterItem("a");
-		theOtherChItem = new CharacterItem("b");
+		theChItem = new CharacterItem('a');
+		theSameChItem = new CharacterItem('a');
+		theOtherChItem = new CharacterItem('b');
 		
 		assertTrue(theChItem.equals(theSameChItem));
 		assertFalse(theChItem.equals(theOtherChItem));
