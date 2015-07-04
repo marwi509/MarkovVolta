@@ -3,9 +3,9 @@ package markov.lyricsGenerator;
 
 class LyricsCreator {
 
-	private Dictionary theDictionary;
-	private String song = ""; // The string containing the song
-	private int songLength = 5000; // Max length of the song string
+	Dictionary theDictionary;
+	String song = ""; // The string containing the song
+	int songLength = 5000; // Max length of the song string
 
 	public void setInput(Dictionary d)
 	{

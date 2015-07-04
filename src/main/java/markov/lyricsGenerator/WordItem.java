@@ -1,5 +1,7 @@
 package markov.lyricsGenerator;
 
+import java.util.Arrays;
+
 public class WordItem implements LyricsItem{
 
 	private char[] word;
@@ -22,12 +24,8 @@ public class WordItem implements LyricsItem{
 	@Override
 	public int hashCode()
 	{
-		int result = 0;
-        for (char aWord : word) {
-            result = result * 31 + aWord;
-        }
-		return result;
-	}
+        return Arrays.hashCode(word);
+    }
 	
 	public String toString() {
 		return new String(word) + " ";
