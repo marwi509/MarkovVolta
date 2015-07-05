@@ -13,15 +13,20 @@ public final class SequenceList implements Hashable, Iterable<Pair> {
 	
 	public SequenceList(Sequence theSequenceIn)
 	{
-		theSequence = theSequenceIn.copyMe();
+		theSequence = theSequenceIn;
 		theListIndices = new HashSetTable<>();
 	}
 
     public SequenceList addItem(LyricsItem theItem)
 	{
 		insertions++;
-		Pair tempPair = theListIndices.insert(new Pair(theItem, 0));
-		tempPair.setAmount(tempPair.getAmount() + 1);
+        Pair pair = new Pair(theItem, 0);
+        if(theListIndices.contains(pair)) {
+            pair = theListIndices.get(pair);
+        }
+
+        pair = pair.withAmount(pair.getAmount() + 1);
+        theListIndices.insert(pair);
         return this;
 	}
 	

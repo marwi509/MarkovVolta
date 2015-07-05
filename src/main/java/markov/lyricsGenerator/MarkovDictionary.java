@@ -24,19 +24,26 @@ public final class MarkovDictionary
         for (int i = 0; i < lyricsItems.size(); i++) {
             if (i % 100000 == 0)
                 System.out.println("Item " + i + " of " + lyricsItems.size());
-            SequenceList theSList = theSequenceListTable.insert(new SequenceList(theSequence));
-            theSList.addItem(lyricsItems.get(i));
+            SequenceList sList = new SequenceList(theSequence);
+            if(theSequenceListTable.contains(sList)) {
+                sList = theSequenceListTable.get(sList);
+            }
+
+            sList.addItem(lyricsItems.get(i));
+            theSequenceListTable.insert(sList);
             theSequence = theSequence.push(lyricsItems.get(i));
         }
     }
 
     @Override
     public LyricsItem getItem() {
-        SequenceList theSList = theSequenceListTable.contains(new SequenceList(currentSequence));
-        if (theSList == null) {
-            theSList = retryWithEmptySequence();
+        SequenceList sequenceList = new SequenceList(currentSequence);
+        if (theSequenceListTable.contains(sequenceList)) {
+            sequenceList = theSequenceListTable.get(sequenceList);
+        } else {
+            sequenceList = retryWithEmptySequence();
         }
-        return getRandomItemFromSequence(theSList);
+        return getRandomItemFromSequence(sequenceList);
     }
 
     private LyricsItem getRandomItemFromSequence(SequenceList theSList) {
@@ -62,7 +69,7 @@ public final class MarkovDictionary
 
     private SequenceList retryWithEmptySequence() {
         currentSequence = Sequence.empty();
-        return theSequenceListTable.contains(new SequenceList(currentSequence));
+        return theSequenceListTable.get(new SequenceList(currentSequence));
     }
 
 }

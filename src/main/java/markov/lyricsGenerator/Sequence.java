@@ -2,38 +2,49 @@ package markov.lyricsGenerator;
 
 import markov.util.Hashable;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Arrays;
 
 
 public class Sequence implements Hashable{
 
-	private List<LyricsItem> items = new ArrayList<>();
+	private final LyricsItem[] items;
 	private static int sequenceLength = 4;
 
-    private Sequence(){}
-
-    public static Sequence empty() {
-        return new Sequence();
+    private Sequence(LyricsItem[] items){
+        this.items = items;
     }
 
-    public Sequence copyMe()
-	{
-		Sequence tempSequence = new Sequence();
-        items.forEach(tempSequence::push);
-		return tempSequence;
-	}
+    public static Sequence empty() {
+        return new Sequence(new LyricsItem[] {});
+    }
+
 	public Sequence push(LyricsItem theItem)
 	{
-		items.add(theItem);
-		if(items.size() > sequenceLength)
-			items.remove(0);
-
-        return this;
+        if(items.length > sequenceLength - 1) {
+            return new Sequence(createNewSequenceFromFullSequence(theItem));
+        }
+        else {
+            return new Sequence(createNewSequenceFromPartialSequence(theItem));
+        }
 	}
-	
-	public static void setSequenceLength(int theLength)
+
+    private LyricsItem[] createNewSequenceFromPartialSequence(LyricsItem theItem) {
+        LyricsItem[] newArray;
+        newArray = new LyricsItem[items.length + 1];
+        System.arraycopy(items, 0, newArray, 0, items.length);
+        newArray[items.length] = theItem;
+        return newArray;
+    }
+
+    private LyricsItem[] createNewSequenceFromFullSequence(LyricsItem theItem) {
+        LyricsItem[] newArray;
+        newArray = new LyricsItem[sequenceLength];
+        System.arraycopy(items, 1, newArray, 0, items.length  - 1);
+        newArray[sequenceLength - 1] = theItem;
+        return newArray;
+    }
+
+    public static void setSequenceLength(int theLength)
 	{
 		sequenceLength = theLength;
 	}
@@ -41,7 +52,7 @@ public class Sequence implements Hashable{
 	@Override
 	public int hashCode()
 	{
-		if(items.isEmpty())
+		if(items.length == 0)
 			return 42;
 		int result = 0;
         for (LyricsItem item : items) {
@@ -49,27 +60,12 @@ public class Sequence implements Hashable{
         }
 		return result;
 	}
-	
-	public List<LyricsItem> getList()
-	{
-		return items;
-	}
-	
-	public boolean equals(Sequence theSequence)
-	{
-		List<LyricsItem> otherItems = theSequence.getList();
-		if(items.size()!=otherItems.size())
-			return false;
-		
-		Iterator<LyricsItem> theIter = items.iterator();
-		Iterator<LyricsItem> theOtherIter = theSequence.getList().iterator();
-		while(theIter.hasNext())
-		{
-			if(!theIter.next().equals(theOtherIter.next()))
-				return false;
-		}
-		return true;
-	}
+
+	public boolean equals(Sequence theSequence) {
+        return items.length == theSequence.items.length &&
+                Arrays.equals(items, theSequence.items);
+
+    }
 	public String toString()
 	{
 		String returnString="";

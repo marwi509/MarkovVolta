@@ -12,22 +12,17 @@ public class ArrayTable<Element> implements Table<Element>{
 	}
 	
 	@Override
-	public Element contains(Element theElement) {
+	public Element get(Element theElement) {
 		for (Element aTheList : theList) {
 			if (theElement.equals(aTheList)) {
 				return aTheList;
 			}
 		}
-		return null;
+		throw new IllegalStateException(theElement + " was not in the list");
 	}
 
 	@Override
 	public Element insert(Element theElement) {
-		for (Element aTheList : theList) {
-			if (theElement.equals(aTheList)) {
-				return aTheList;
-			}
-		}
 		theList.add(theElement);
 		return theList.get(theList.size()-1);
 	}
@@ -35,6 +30,11 @@ public class ArrayTable<Element> implements Table<Element>{
 	@Override
 	public Iterator<Element> iterator() {
 		return theList.iterator();
+	}
+
+	@Override
+	public boolean contains(Element element) {
+		return theList.contains(element);
 	}
 
 }
