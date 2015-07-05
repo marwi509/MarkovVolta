@@ -3,18 +3,9 @@ package markov.lyricsGenerator;
 
 public class SimpleLyricsCreator extends LyricsCreator{
 	
-	private int charsPerRow = 40;
-	private int rowsPerParagraph = 4;
+	private static final int charsPerRow = 40;
+	private static final int rowsPerParagraph = 4;
 
-	public void setRowLength(int length)
-	{
-		charsPerRow = length;
-	}
-	
-	public void setRowsPerParagraph(int num)
-	{
-		rowsPerParagraph = num;
-	}
 	@Override
 	public void createSong(int length) {
 		while(song.length() < songLength)

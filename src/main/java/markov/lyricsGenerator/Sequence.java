@@ -21,16 +21,16 @@ public class Sequence implements Hashable{
     public Sequence copyMe()
 	{
 		Sequence tempSequence = new Sequence();
-        for (LyricsItem item : items) {
-            tempSequence.push(item);
-        }
+        items.forEach(tempSequence::push);
 		return tempSequence;
 	}
-	public void push(LyricsItem theItem)
+	public Sequence push(LyricsItem theItem)
 	{
 		items.add(theItem);
 		if(items.size() > sequenceLength)
 			items.remove(0);
+
+        return this;
 	}
 	
 	public static void setSequenceLength(int theLength)

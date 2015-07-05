@@ -7,7 +7,7 @@ package markov.lyricsGenerator;
  *
  */
 
-public class CharacterItem implements LyricsItem {
+public final class CharacterItem implements LyricsItem {
 
 	private final char character;
 

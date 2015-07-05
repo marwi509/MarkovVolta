@@ -5,7 +5,7 @@ import markov.util.Table;
 import java.util.List;
 import java.util.Random;
 
-public class MarkovDictionary
+public final class MarkovDictionary
     implements Dictionary {
     private final Table<SequenceList> theSequenceListTable;
     private final Random randomGenerator;
@@ -26,7 +26,7 @@ public class MarkovDictionary
                 System.out.println("Item " + i + " of " + lyricsItems.size());
             SequenceList theSList = theSequenceListTable.insert(new SequenceList(theSequence));
             theSList.addItem(lyricsItems.get(i));
-            theSequence.push(lyricsItems.get(i));
+            theSequence = theSequence.push(lyricsItems.get(i));
         }
     }
 
@@ -46,7 +46,7 @@ public class MarkovDictionary
         for(Pair pair : theSList) {
 
             if (randNumber < pair.getAmount() + sum) {
-                currentSequence.push(pair.getItem());
+                currentSequence = currentSequence.push(pair.getItem());
                 return pair.getItem();
             }
 

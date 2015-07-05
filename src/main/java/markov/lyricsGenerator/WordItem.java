@@ -2,16 +2,13 @@ package markov.lyricsGenerator;
 
 import java.util.Arrays;
 
-public class WordItem implements LyricsItem{
+public final class WordItem implements LyricsItem{
 
-	private char[] word;
+	private final char[] word;
+
 	public WordItem(String c)
 	{
-		if(c.length()!=0)
-		{
-			word = new char[c.length()];
-			word = c.toCharArray();
-		}
+        word = c.toCharArray();
 	}
 
 	@Override

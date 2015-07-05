@@ -29,9 +29,9 @@ public class LyricsFacade {
 	/* Standard constructor */
 	public LyricsFacade(Random random, Table<SequenceList> table)
 	{
-		setUseCharacter();
 		this.random = random;
 		this.table = table;
+        setUseCharacter();
 	}
 	
 	/* Set the facade to use characters */
@@ -51,10 +51,17 @@ public class LyricsFacade {
 		theLyricsCreator = new SimpleLyricsCreator();
 		Sequence.setSequenceLength(wordSequenceLength);
 	}
-	
-	/* Add a song to the dictionary */
-	public void addSong(String filename)
-	{
+
+    public void addSongContent(String content) {
+        List<LyricsItem> theItems = theParser.parse(content);
+        System.out.println("File content parsed.");
+
+        theDictionary.addItemVector(theItems);
+        System.out.println("File content added to dictionary.");
+    }
+
+    /* Add a song to the dictionary */
+	public void addSong(String filename) {
 		FileReader theFileReader = new FileReader();
 		theFileReader.readFile(filename);
 		System.out.println("File read.");

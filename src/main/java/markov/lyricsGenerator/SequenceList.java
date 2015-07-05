@@ -6,7 +6,7 @@ import markov.util.Table;
 
 import java.util.Iterator;
 
-public class SequenceList implements Hashable, Iterable<Pair> {
+public final class SequenceList implements Hashable, Iterable<Pair> {
 	private final Sequence theSequence;
 	private final Table<Pair> theListIndices;
 	private int insertions = 0;
@@ -17,11 +17,12 @@ public class SequenceList implements Hashable, Iterable<Pair> {
 		theListIndices = new HashSetTable<>();
 	}
 
-    public void addItem(LyricsItem theItem)
+    public SequenceList addItem(LyricsItem theItem)
 	{
 		insertions++;
 		Pair tempPair = theListIndices.insert(new Pair(theItem, 0));
 		tempPair.setAmount(tempPair.getAmount() + 1);
+        return this;
 	}
 	
 	public Iterator<Pair> iterator()

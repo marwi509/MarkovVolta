@@ -37,7 +37,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>markov.main.Main</mainClass>
+                            <mainClass>markov.gui.SimpleFrame</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
